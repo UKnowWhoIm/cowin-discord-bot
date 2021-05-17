@@ -1,0 +1,24 @@
+{
+  "name": "cowin-discord-bot",
+  "version": "0.0.1",
+  "description": "A discord app to get upcoming COWIN appointments based on commands",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UKnowWhoIm/cowin-discord-bot.git"
+  },
+  "keywords": [
+    "discord-bot",
+    "cowin",
+    "vaccine"
+  ],
+  "author": "UKnowWhoIm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UKnowWhoIm/cowin-discord-bot/issues"
+  },
+  "homepage": "https://github.com/UKnowWhoIm/cowin-discord-bot#readme"
+}
