@@ -4,7 +4,8 @@
   "description": "A discord app to get upcoming COWIN appointments based on commands",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "jshint --exclude='node_modules/' *.js",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/UKnowWhoIm/cowin-discord-bot/issues"
   },
-  "homepage": "https://github.com/UKnowWhoIm/cowin-discord-bot#readme"
+  "homepage": "https://github.com/UKnowWhoIm/cowin-discord-bot#readme",
+  "dependencies": {
+    "jshint": "^2.12.0"
+  }
 }

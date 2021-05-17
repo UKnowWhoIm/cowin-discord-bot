@@ -1,0 +1,15 @@
+{
+    "node": true,
+    "esversion": 9,
+    "camelcase": true,
+    "eqeqeq": true,
+    "evil": true,
+    "freeze": true,
+    "indent": 4,
+    "newcap": true,
+    "quotmark": "double",
+    "maxlen": 120,
+    "eqnull": true,
+    "funcscope": true,
+    "globals": {}
+  }
