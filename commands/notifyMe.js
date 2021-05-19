@@ -1,10 +1,14 @@
-import { sendReply } from "./common.js"
+import { Command, sendReply } from "./common.js"
 
-export const commandData = {
+const name = "notify-me";
+
+const commandData = {
     "name": "notify-me",
     "description": "Send hourly alerts if slot is available"
 }
 
-export function addUserToListners(bot, interaction){
+function addUserToListners(bot, interaction){
     sendReply(bot, interaction, `User ${interaction.member.user.username}#${interaction.member.user.discriminator} subscribed`)
 }
+
+new Command(name, commandData, addUserToListners);

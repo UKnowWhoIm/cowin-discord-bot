@@ -1,8 +1,6 @@
 import { Client } from "discord.js";
 import { config } from "dotenv";
-import { commandData as helpCmdData, showHelp } from "./commands/help.js";
-import { commandData as setCmdData, setAgeOrDistrict } from "./commands/set.js";
-import { commandData as notifyCmdData, addUserToListners } from "./commands/notifyMe.js";
+import { Command } from "./commands/common.js";
 
 config();
 
@@ -16,29 +14,16 @@ const getApp = (guildId) => {
 		.guilds(guildId);
 };
 
-const botCmdMap = {
-	"help": showHelp,
-	"set": setAgeOrDistrict,
-	"notify-me": addUserToListners
-};
+import "./commands/help.js";
+import "./commands/notifyMe.js";
+import "./commands/set.js";
+import "./commands/check.js";
+const botCmdMap = Command.getCallBackMap();
 
 bot.once("ready", async () => {
   	console.log(`Logged in as ${bot.user.tag}!`);
-	const commands = await getApp(GUILD_ID).commands.get();
-	/*
-	await getApp(GUILD_ID).commands.post({
-		"data": notifyCmdData
-	});
-	await getApp(GUILD_ID).commands.post({
-		"data": helpCmdData
-	});
 	
-	await getApp(GUILD_ID).commands.post({
-		"data": setCmdData
-	});
-	*/
-
-	console.log(commands);
+	Command.initialize(getApp, GUILD_ID);
 
 	bot.ws.on("INTERACTION_CREATE", async (interaction) => {
 		const command = interaction.data.name.toLowerCase();

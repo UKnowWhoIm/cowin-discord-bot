@@ -1,6 +1,8 @@
-import { sendReply } from "./common.js";
+import { Command, sendReply } from "./common.js";
 
-export const commandData = {
+const name = "set";
+
+const commandData = {
     "name": "set",
     "description": 'Set age/district of vaccinator',
     "options": [
@@ -41,7 +43,7 @@ function extractSubCommand(data){
     return data.options[0].name;
 }
 
-export function setAgeOrDistrict(bot, interaction){
+function setAgeOrDistrict(bot, interaction){
     let data = interaction.data;
     let subCommand = extractSubCommand(data);    
     let subValue = extractValueOfSubCommand(data);
@@ -55,3 +57,5 @@ export function setAgeOrDistrict(bot, interaction){
     
     sendReply(bot, interaction, msg);
 }
+
+new Command(name, commandData, setAgeOrDistrict);
