@@ -6,6 +6,30 @@ import {
     getCalenderByDistrictPath,
 } from "./helper.js";
 
+function getDataFromResponse(res) {
+    let data = [];
+    for (const r of res) {
+        let result = {
+            centerId: r.center_id,
+            name: r.name,
+            blockName: r.block_name,
+            from: r.from,
+            to: r.to,
+            feeType: r.fee_type,
+        };
+        for (const session of r.sessions) {
+            (result.dose1Capacity = session.available_capacity_dose1),
+                (result.dose2Capacity = session.available_capacity_dose2),
+                (result.ageLimit = session.min_age_limit),
+                (result.vaccine = session.vaccine),
+                (result.slots = session.slots);
+        }
+        if (result.dose1_capacity !== 0 || result.dose2_capacity !== 0)
+            data = [...data, result];
+    }
+    return data;
+}
+
 async function getStates() {
     try {
         const res = await api.get(getStatesPath);
@@ -62,10 +86,11 @@ async function getCalenderByPin(pin, date) {
         );
 
         if (res.status === 200) {
-            if (res.data.centers !== undefined)
+            const result = res.data.centers;
+            if (result !== undefined)
                 return {
                     status: true,
-                    result: res.data.centers,
+                    result: getDataFromResponse(result),
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -90,10 +115,11 @@ async function getCalenderByDistrict(id, date) {
         );
 
         if (res.status === 200) {
-            if (res.data.centers !== undefined)
+            const result = res.data.centers;
+            if (result !== undefined)
                 return {
                     status: true,
-                    result: res.data.centers,
+                    result: getDataFromResponse(result),
                 };
             else throw new Error("Centers are undefined");
         } else {
