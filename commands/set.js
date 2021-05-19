@@ -4,7 +4,7 @@ const name = "set";
 
 const commandData = {
     "name": "set",
-    "description": 'Set age/district of vaccinator',
+    "description": "Set age/district of vaccinator",
     "options": [
         {
             "name": "age",
@@ -33,7 +33,7 @@ const commandData = {
             ]
         },
     ]
-}
+};
 
 function extractValueOfSubCommand(data){
     return data.options[0].options[0].value;

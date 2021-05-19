@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "lint": "jshint --exclude='node_modules/' *.js",
+    "lint": "jshint --exclude='node_modules/' *.js commands/*.js",
     "test": "npm run lint",
     "start": "node index.js"
   },

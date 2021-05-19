@@ -1,5 +1,5 @@
 export class Command{
-    static instances = []
+    static instances = [];
 
     constructor(cmdName, cmdData, cmdCallBack){
         this.name = cmdName;
@@ -8,17 +8,17 @@ export class Command{
         Command.instances.push(this);
     }
 
-    static initialize(appInstanceCallBack, guildId){
+    static initialize(appInstance){
         // Create all commands
         Command.instances.forEach(async (instance) => {
-            await appInstanceCallBack(guildId)({
-                "data": instance.cmdData
+            await appInstance({
+                "data": instance.data
             });
         });
     }
 
     static getCallBackMap(){
-        let map = {}
+        let map = {};
         Command.instances.forEach((instance) => {
             map[instance.name] = instance.callback;
         });

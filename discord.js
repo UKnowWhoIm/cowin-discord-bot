@@ -1,6 +1,7 @@
 import { Client } from "discord.js";
 import { config } from "dotenv";
 import { Command } from "./commands/common.js";
+import "./commands/loadCommands.js";
 
 config();
 
@@ -14,19 +15,16 @@ const getApp = (guildId) => {
 		.guilds(guildId);
 };
 
-import "./commands/help.js";
-import "./commands/notifyMe.js";
-import "./commands/set.js";
-import "./commands/check.js";
 const botCmdMap = Command.getCallBackMap();
 
 bot.once("ready", async () => {
-  	console.log(`Logged in as ${bot.user.tag}!`);
+  	
+	console.log(`Logged in as ${bot.user.tag}!`);
 	
-	Command.initialize(getApp, GUILD_ID);
+	Command.initialize(getApp(GUILD_ID).commands.post);
 
 	bot.ws.on("INTERACTION_CREATE", async (interaction) => {
-		const command = interaction.data.name.toLowerCase();
+		const command = interaction.data.name;
 		
 		if(botCmdMap[command])
 			botCmdMap[command](bot, interaction);

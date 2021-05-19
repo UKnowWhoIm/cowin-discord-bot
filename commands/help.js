@@ -1,6 +1,11 @@
-import { sendReply, Command } from "./common.js"
+import { sendReply, Command } from "./common.js";
 
-const helpText = "Available Commands\n/set district <DISTRICT>: Set desired district\n/set age <AGE>: Set vaccinator's age.\n/notify-me: Notify user hourly if there are slots available for a week.\n/check <AGE> <DATE> <DISTRICT>: Check vaccine availability now for these parameters.";
+const helpText = `Available Commands
+
+/set district <DISTRICT>: Set desired district
+/set age <AGE>: Set vaccinator's age.
+/notify-me: Notify user hourly if there are slots available for a week.
+/check <AGE> <DATE> <DISTRICT>: Check vaccine availability now for these parameters.`;
 
 const cmdName = "help";
 
