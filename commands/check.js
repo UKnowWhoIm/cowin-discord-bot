@@ -1,4 +1,5 @@
 import { Command, sendReply } from "./common.js";
+import { getCalenderByDistrict } from "../api/api.js"
 
 const cmdName = "check";
 
@@ -27,7 +28,7 @@ const cmdData = {
     ]
 };
 
-function checkAvailability(bot, interaction){
+async function checkAvailability(bot, interaction){
     const options = interaction.data.options;
     let date = options.filter((option) => option.name === "date")[0].value;
    

@@ -37,3 +37,7 @@ export function sendReply(bot, interaction, msg){
         }
     });
 }
+
+export function sendDM(bot, userId, msg){
+    bot.users.fetch(userId).then(dm => dm.send(msg));
+}

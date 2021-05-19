@@ -1,4 +1,4 @@
-import { Command, sendReply } from "./common.js";
+import { Command, sendReply, sendDM } from "./common.js";
 
 const name = "notify-me";
 
@@ -9,8 +9,10 @@ const commandData = {
 
 function addUserToListners(bot, interaction){
     const user = interaction.member.user;
-    sendReply(bot, interaction, 
-        `User ${user.username}#${user.discriminator} subscribed`);
+    console.log(user);
+    sendReply(bot, interaction, `User ${user.id} subscribed`);
+
+    //sendDM(bot, user.id, `User ${user.id} subscribed`)
 }
 
 new Command(name, commandData, addUserToListners);
