@@ -4,7 +4,7 @@
   "description": "A discord app to get upcoming COWIN appointments based on commands",
   "main": "index.js",
   "scripts": {
-    "lint": "jshint --exclude='node_modules/' *.js",
+    "lint": "jshint --exclude='node_modules/' *.js api/*.js",
     "test": "npm run lint"
   },
   "repository": {
