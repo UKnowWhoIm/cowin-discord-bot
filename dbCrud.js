@@ -17,7 +17,6 @@ async function createUser(
     const info = {
         username: username,
         userDiscriminator,
-        userDiscriminator,
         district: district,
         pin: pin,
         age: age,

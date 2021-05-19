@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 import { config } from "dotenv";
 
-
 config();
 
 const url = process.env.MONGODB_SRV;
-const db = process.env.DB_NAME;
 
 try {
     await mongoose.connect(url, {
@@ -16,5 +14,3 @@ try {
 } catch (error) {
     console.log(error);
 }
-
-
