@@ -6,8 +6,8 @@ This directoy contains all commands used by the COWIN-bot. All commands are slas
 
 1. [/check](#check)
 2. [/help](#help)
-3. [/notify-me]()
-4. [/set]()
+3. [/notify-me](#notify-me)
+4. [/set](#set)
 
 ### check
 
