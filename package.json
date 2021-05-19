@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "lint": "jshint --exclude='node_modules/' *.js commands/*.js",
+    "lint": "jshint --exclude='node_modules/' *.js commands/*.js api/*.js",
     "test": "npm run lint",
     "start": "node index.js"
   },
@@ -29,5 +29,7 @@
     "dotenv": "^9.0.2",
     "jshint": "^2.12.0",
     "string-similarity": "^4.0.4"
-  }
+    "axios": "^0.21.1",
+  },
+  "type": "module"
 }
