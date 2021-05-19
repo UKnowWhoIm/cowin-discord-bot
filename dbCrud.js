@@ -7,16 +7,14 @@ const NOTIFY = "notify";
 
 // set
 async function createUser(
-    username,
-    userDiscriminator,
+    userID,
     district = "",
     pin = null,
     age = null,
     notify = false
 ) {
     const info = {
-        username: username,
-        userDiscriminator,
+        userID: userID,
         district: district,
         pin: pin,
         age: age,
@@ -33,12 +31,9 @@ async function createUser(
 }
 
 // check
-async function readUserData(username, userDiscriminator) {
+async function readUserData(userID) {
     try {
-        let obj = await DataModel.findOne({
-            username: username,
-            userDiscriminator: userDiscriminator,
-        });
+        let obj = await DataModel.findOne(userID);
 
         return obj;
     } catch (error) {
@@ -47,8 +42,8 @@ async function readUserData(username, userDiscriminator) {
 }
 
 // set
-async function updateUserData(username, userDiscriminator, data) {
-    const filter = { username: username, userDiscriminator: userDiscriminator };
+async function updateUserData(userID, data) {
+    const filter = { userID: userID };
     try {
         await DataModel.findOneAndUpdate(filter, data, { upsert: true });
     } catch (error) {
@@ -56,9 +51,9 @@ async function updateUserData(username, userDiscriminator, data) {
     }
 }
 
-async function deleteUserData(username, userDiscriminator) {
+async function deleteUserData(userID) {
     try {
-        await DataModel.deleteOne(username, userDiscriminator);
+        await DataModel.deleteOne(userID);
     } catch (error) {
         console.log(error);
     }

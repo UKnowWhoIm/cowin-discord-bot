@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
 const dataSchema = new mongoose.Schema({
-    username: { type: String, require: true },
-    userDiscriminator: { type: String, require: true },
+    userID: { type: Number, require: true },
     district: { type: String },
     pin: { type: Number },
     age: { type: Number },
