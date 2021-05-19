@@ -1,42 +1,23 @@
-import mongoose from "mongoose";
-import { config } from "dotenv";
-
-import { DataModel } from "./models/dataSchema";
-
-
-config();
-
-const url = process.env.MONGODB_SRV;
-const db = process.env.DB_NAME;
+import { DataModel } from "./models/dataSchema.js";
 
 const DISTRICT = "district";
 const PIN = "pin";
 const AGE = "age";
 const NOTIFY = "notify";
 
-async function getDBObject() {
-    try {
-        const conn = await mongoose.connect(url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        return { db: conn.db(db), conn: conn };
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// help
+// set
 async function createUser(
-    user,
+    username,
+    userDiscriminator,
     district = "",
     pin = null,
     age = null,
     notify = false
 ) {
     const info = {
-        userID: user.id,
-        serverID: user.guild.id,
+        username: username,
+        userDiscriminator,
+        userDiscriminator,
         district: district,
         pin: pin,
         age: age,
@@ -44,25 +25,22 @@ async function createUser(
     };
 
     try {
-        let dbObj = await getDBObject();
         let obj = await DataModel.create(info);
         obj.save();
-        dbObj.conn.close();
-        return String(obj.insertedId);
+        return String(obj);
     } catch (error) {
         console.log(error);
     }
 }
 
 // check
-async function readUserData(user) {
+async function readUserData(username, userDiscriminator) {
     try {
-        let dbObj = await getDBObject();
-        let obj = await DataModel.findOne({ userID: user.id });
+        let obj = await DataModel.findOne({
+            username: username,
+            userDiscriminator: userDiscriminator,
+        });
 
-        if (!obj) createUser(user);
-
-        dbObj.conn.close();
         return obj;
     } catch (error) {
         console.log(error);
@@ -70,31 +48,18 @@ async function readUserData(user) {
 }
 
 // set
-async function updateUserData(id, type, data) {
-    let updateData = {};
-
-    if (type === DISTRICT) updateData.district = data;
-    if (type === PIN) updateData.pin = data;
-    if (type === AGE) updateData.age = data;
-    if (type === NOTIFY) updateData.notify = data;
-
+async function updateUserData(username, userDiscriminator, data) {
+    const filter = { username: username, userDiscriminator: userDiscriminator };
     try {
-        let dbObj = await getDBObject();
-        await DataModel.findOneAndUpdate({ userID: id }, updateData, {
-            upsert: true,
-        });
-
-        dbObj.conn.close();
+        await DataModel.findOneAndUpdate(filter, data, { upsert: true });
     } catch (error) {
         console.log(error);
     }
 }
 
-async function deleteUserData(id) {
+async function deleteUserData(username, userDiscriminator) {
     try {
-        let dbObj = await getDBObject();
-        await DataModel.deleteOne({ userID: id });
-        dbObj.conn.close();
+        await DataModel.deleteOne(username, userDiscriminator);
     } catch (error) {
         console.log(error);
     }
