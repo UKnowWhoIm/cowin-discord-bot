@@ -1,5 +1,5 @@
 export class Command{
-    static instances = [];
+    static instances = [];    // jshint ignore:line
 
     constructor(cmdName, cmdData, cmdCallBack){
         this.name = cmdName;

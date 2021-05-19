@@ -30,13 +30,11 @@ const cmdData = {
 function checkAvailability(bot, interaction){
     const options = interaction.data.options;
     let date = options.filter((option) => option.name === "date")[0].value;
-    let district = options.filter((option) => option.name === "district")[0];
-    let age = options.filter((option) => option.name === "age")[0];
-    
-    if(district)
-        district = district.value;
-    if(age)
-        age = age.value;
+   
+    /* jshint ignore:start */
+    let district = options.filter((option) => option.name === "district")[0]?.value;
+    let age = options.filter((option) => option.name === "age")[0]?.value
+    /* jshint ignore:end */
     
     sendReply(bot, interaction, `Check availabilty for ${date} ${district} ${age}`);
 }
