@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "A discord app to get upcoming COWIN appointments based on commands",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "lint": "jshint --exclude='node_modules/' *.js",
-    "test": "npm run lint"
+    "lint": "jshint --exclude='node_modules/' *.js commands/*.js api/*.js",
+    "test": "npm run lint",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,10 @@
     "axios": "^0.21.1",
     "dotenv": "^9.0.2",
     "jshint": "^2.12.0",
-    "mongoose": "^5.12.10"
+    "mongoose": "^5.12.10",
+    "discord.js": "^12.5.3",
+    "string-similarity": "^4.0.4"
   },
   "type": "module"
+  }
 }
