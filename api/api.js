@@ -10,21 +10,21 @@ function getDataFromResponse(res) {
     let data = [];
     for (const r of res) {
         let result = {
-            centerId: r.center_id,
-            name: r.name,
-            blockName: r.block_name,
-            from: r.from,
-            to: r.to,
-            feeType: r.fee_type,
+            centerId: r["center_id"],
+            name: r["name"],
+            blockName: r["block_name"],
+            from: r["from"],
+            to: r["to"],
+            feeType: r["fee_type"],
         };
-        for (const session of r.sessions) {
-            (result.dose1Capacity = session.available_capacity_dose1),
-                (result.dose2Capacity = session.available_capacity_dose2),
-                (result.ageLimit = session.min_age_limit),
-                (result.vaccine = session.vaccine),
-                (result.slots = session.slots);
+        for (const session of r["sessions"]) {
+            result.dose1Capacity = session["available_capacity_dose1"];
+            result.dose2Capacity = session["available_capacity_dose2"];
+            result.ageLimit = session["min_age_limit"];
+            result.vaccine = session["vaccine"];
+            result.slots = session["slots"];
         }
-        if (result.dose1_capacity !== 0 || result.dose2_capacity !== 0)
+        if (result.dose1Capacity !== 0 || result.dose2Capacity !== 0)
             data = [...data, result];
     }
     return data;
