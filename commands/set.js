@@ -1,4 +1,4 @@
-import { Command, sendReply, parseDistrict } from "./common.js";
+import { Command, sendReply, parseDistrict, getUserID, getAge } from "./common.js";
 import { createUser, updateUserData, readUserData } from "../dbCrud.js";
 
 const name = "set";
@@ -53,7 +53,7 @@ async function setAgeOrDistrict(bot, interaction){
     let msg;
    
     if(subCommand === "age"){
-        subValue = subValue >= 45 ? 45 : 18;
+        subValue = getAge(subValue);
         msg = `Vaccination age slot set to ${subValue}`;
     }
     else if(subCommand === "district"){
@@ -65,7 +65,7 @@ async function setAgeOrDistrict(bot, interaction){
     }
 
     userData[subCommand] = subValue;
-    const userInDb = await readUserData(interaction.member.user.id);
+    const userInDb = await readUserData(getUserID(interaction));
     if(userInDb){
         await updateUserData(userInDb.userID, userData);
     }
