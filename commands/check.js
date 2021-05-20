@@ -1,5 +1,4 @@
 import { Command, getAge, getUserID, parseDistrict, processResults, sendReply } from "./common.js";
-import { getCalenderByDistrict } from "../api/api.js";
 import { readUserData } from "../dbCrud.js";
 
 const cmdName = "check";
@@ -42,10 +41,12 @@ async function checkAvailability(bot, interaction){
     const userInDb = await readUserData(getUserID(interaction));
     
     if(!district){
-        if(!userInDb?.district) // jshint ignore:line
+        // jshint ignore:start
+        if(!userInDb?.district) 
             return sendReply(bot, interaction, 
                 "Set your district using /set command or enter them while using /check");
         district = userInDb.district;
+        // jshint ignore:end
     }
     else{
         let districtData = await parseDistrict(district);
@@ -55,14 +56,16 @@ async function checkAvailability(bot, interaction){
         district = districtData.code;
     }
     if(!age){
-        if(!userInDb?.age) // jshint ignore:line
+        // jshint ignore:start
+        if(!userInDb?.age)
             return sendReply(bot, interaction,
                 "Set your age using /set command or enter it while using /check");
         age = userInDb.age;
+        // jshint ignore:end
     }
     else
         age = getAge(age);
-        
+
     if(!dateRegex.test(date))
         return sendReply(bot, interaction,
             "Invalid date, please enter date in format dd-mm-yyyy");

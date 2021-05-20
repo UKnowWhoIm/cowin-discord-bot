@@ -56,7 +56,7 @@ export async function parseDistrict(district){
     const districtNames = districtsInDb.map((districtDoc) => districtDoc.districtName.toLowerCase());
     const matches = findBestMatch(district.toLowerCase(), districtNames).ratings
         .filter((match) => match.rating >= minDiceCoeff);
-    console.log(districtsInDb.filter((district) => district.districtName.toLowerCase() === matches[0]?.target));
+
     /* jshint ignore:start */
     return {
         "name": matches[0]?.target,
