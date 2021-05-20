@@ -6,6 +6,35 @@ import {
     getCalenderByDistrictPath,
 } from "./helper.js";
 
+function getDataFromResponse(res, age) {
+    let data = [];
+    for (const r of res) {
+        /* jshint ignore:start */
+        let result = {
+            centerId: r.center_id,
+            name: r.name,
+            blockName: r.block_name,
+            from: r.from,
+            to: r.to,
+            feeType: r.fee_type,
+        };
+        for (const session of r.sessions) {
+            result.dose1Capacity = session.available_capacity_dose1;
+            result.dose2Capacity = session.available_capacity_dose2;
+            result.ageLimit = session.min_age_limit;
+            result.vaccine = session.vaccine;
+            result.slots = session.slots;
+        }
+        /* jshint ignore:end */
+        if (
+            (result.dose1Capacity !== 0 || result.dose2Capacity !== 0) &&
+            age === result.ageLimit
+        )
+            data = [...data, result];
+    }
+    return data;
+}
+
 async function getStates() {
     try {
         const res = await api.get(getStatesPath);
@@ -55,17 +84,18 @@ async function getDistrictsByStateId(id) {
     }
 }
 
-async function getCalenderByPin(pin, date) {
+async function getCalenderByPin(pin, date, age) {
     try {
         const res = await api.get(
             `${getCalenderByPinPath}pincode=${pin}&date=${date}`
         );
 
         if (res.status === 200) {
-            if (res.data.centers !== undefined)
+            const result = res.data.centers;
+            if (result !== undefined)
                 return {
                     status: true,
-                    result: res.data.centers,
+                    result: getDataFromResponse(result, age),
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -83,17 +113,18 @@ async function getCalenderByPin(pin, date) {
     }
 }
 
-async function getCalenderByDistrict(id, date) {
+async function getCalenderByDistrict(id, date, age) {
     try {
         const res = await api.get(
             `${getCalenderByDistrictPath}district_id=${id}&date=${date}`
         );
 
         if (res.status === 200) {
-            if (res.data.centers !== undefined)
+            const result = res.data.centers;
+            if (result !== undefined)
                 return {
                     status: true,
-                    result: res.data.centers,
+                    result: getDataFromResponse(result, age),
                 };
             else throw new Error("Centers are undefined");
         } else {
