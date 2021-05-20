@@ -6,12 +6,12 @@ import {
     getCalenderByDistrictPath,
 } from "./helper.js";
 
-function getDataFromResponse(res) {
+function getDataFromResponse(res, age) {
     let data = [];
     for (const r of res) {
         /* jshint ignore:start */
         let result = {
-            centerId: r.center_id, 
+            centerId: r.center_id,
             name: r.name,
             blockName: r.block_name,
             from: r.from,
@@ -26,7 +26,10 @@ function getDataFromResponse(res) {
             result.slots = session.slots;
         }
         /* jshint ignore:end */
-        if (result.dose1Capacity !== 0 || result.dose2Capacity !== 0)
+        if (
+            (result.dose1Capacity !== 0 || result.dose2Capacity !== 0) &&
+            age === result.ageLimit
+        )
             data = [...data, result];
     }
     return data;
@@ -81,7 +84,7 @@ async function getDistrictsByStateId(id) {
     }
 }
 
-async function getCalenderByPin(pin, date) {
+async function getCalenderByPin(pin, date, age) {
     try {
         const res = await api.get(
             `${getCalenderByPinPath}pincode=${pin}&date=${date}`
@@ -92,7 +95,7 @@ async function getCalenderByPin(pin, date) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: getDataFromResponse(result),
+                    result: getDataFromResponse(result, age),
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -110,7 +113,7 @@ async function getCalenderByPin(pin, date) {
     }
 }
 
-async function getCalenderByDistrict(id, date) {
+async function getCalenderByDistrict(id, date, age) {
     try {
         const res = await api.get(
             `${getCalenderByDistrictPath}district_id=${id}&date=${date}`
@@ -121,7 +124,7 @@ async function getCalenderByDistrict(id, date) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: getDataFromResponse(result),
+                    result: getDataFromResponse(result, age),
                 };
             else throw new Error("Centers are undefined");
         } else {
