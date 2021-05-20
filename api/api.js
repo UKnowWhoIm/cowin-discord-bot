@@ -13,6 +13,8 @@ function getDataFromResponse(res, age) {
         let result = {
             centerId: r.center_id,
             name: r.name,
+            address:r.address,
+            district: r.district_name,
             blockName: r.block_name,
             from: r.from,
             to: r.to,
