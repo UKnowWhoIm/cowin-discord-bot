@@ -1,5 +1,5 @@
 import { Command, sendReply } from "./common.js";
-import { getCalenderByDistrict } from "../api/api.js"
+import { getCalenderByDistrict } from "../api/api.js";
 
 const cmdName = "check";
 
