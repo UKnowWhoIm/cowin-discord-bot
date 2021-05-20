@@ -18,3 +18,4 @@ async function start() {
 }
 
 start();
+import "./discord.js";

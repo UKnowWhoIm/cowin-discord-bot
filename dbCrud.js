@@ -1,24 +1,14 @@
 import { DataModel } from "./models/dataSchema.js";
-
-const DISTRICT = "district";
-const PIN = "pin";
-const AGE = "age";
-const NOTIFY = "notify";
+import { DistrictModel } from "./models/district.js";
 
 // set
-async function createUser(
-    userID,
-    district = "",
-    pin = null,
-    age = null,
-    notify = false
-) {
+async function createUser(userID, userData) {
     const info = {
         userID: userID,
-        district: district,
-        pin: pin,
-        age: age,
-        notify: notify,
+        district: userData.district,
+        pin: userData.pin,
+        age: userData.age,
+        notify: userData.notify,
     };
 
     try {
@@ -33,7 +23,7 @@ async function createUser(
 // check
 async function readUserData(userID) {
     try {
-        let obj = await DataModel.findOne(userID);
+        let obj = await DataModel.findOne({"userID": userID});
 
         return obj;
     } catch (error) {
@@ -59,4 +49,8 @@ async function deleteUserData(userID) {
     }
 }
 
-export { createUser, readUserData, updateUserData, deleteUserData };
+async function getDistricts(){
+    return await DistrictModel.find({});
+}
+
+export { createUser, readUserData, updateUserData, deleteUserData, getDistricts };

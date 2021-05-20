@@ -1,4 +1,5 @@
-import { Command, sendReply } from "./common.js";
+import { Command, sendReply, parseDistrict } from "./common.js";
+import { createUser, updateUserData, readUserData } from "../dbCrud.js";
 
 const name = "set";
 
@@ -43,18 +44,34 @@ function extractSubCommand(data){
     return data.options[0].name;
 }
 
-function setAgeOrDistrict(bot, interaction){
-    let data = interaction.data;
-    let subCommand = extractSubCommand(data);    
+async function setAgeOrDistrict(bot, interaction){
+    const data = interaction.data;
+    const subCommand = extractSubCommand(data);    
     let subValue = extractValueOfSubCommand(data);
-
+    let userData = {};
+    // data = {subCommand: subValue} makes the key "subCommand"
     let msg;
+   
+    if(subCommand === "age"){
+        subValue = subValue >= 45 ? 45 : 18;
+        msg = `Vaccination age slot set to ${subValue}`;
+    }
+    else if(subCommand === "district"){
+        let districtData = await parseDistrict(subValue);
+        if(!districtData.code)
+            return sendReply(bot, interaction, "District not found");
+        subValue = districtData.code;
+        msg = `District set to ${districtData.name}`;
+    }
 
-    if(subCommand === "age")
-        msg = `Your Age is ${subValue}`;
-    else if(subCommand === "district")
-        msg = `Your District is ${subValue}`;
-    
+    userData[subCommand] = subValue;
+    const userInDb = await readUserData(interaction.member.user.id);
+    if(userInDb){
+        await updateUserData(userInDb.userID, userData);
+    }
+    else{
+        await createUser(interaction.member.user.id, userData);
+    }
     sendReply(bot, interaction, msg);
 }
 
