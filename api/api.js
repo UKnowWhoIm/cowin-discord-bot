@@ -14,7 +14,7 @@ function getDataFromResponse(res, age) {
             centerId: r.center_id,
             name: r.name,
             address:r.address,
-            district: r.district_name,
+            pincode: r.pincode,
             blockName: r.block_name,
             from: r.from,
             to: r.to,
