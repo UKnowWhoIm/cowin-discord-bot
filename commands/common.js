@@ -11,10 +11,10 @@ export class Command{
         Command.instances.push(this);
     }
 
-    static initialize(appInstance){
+    static initialize(callback){
         // Create all commands
         Command.instances.forEach(async (instance) => {
-            await appInstance({
+            await callback({
                 "data": instance.data
             });
         });

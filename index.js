@@ -1,15 +1,16 @@
+import express from 'express';
 import mongoose from "mongoose";
-import { config } from "dotenv";
 import { job } from "./cron.js";
-import cron from "node-cron";
+import cron from "node-cron";   
+import { DEBUG, mongoURL } from "./config.js";
 
-config();
 
-const url = process.env.MONGODB_SRV;
+const app = express();
+const port = process.env.PORT ?? "3000";
 
 async function start() {
     try {
-        await mongoose.connect(url, {
+        await mongoose.connect(mongoURL, {
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -21,8 +22,19 @@ async function start() {
 }
 
 start();
+if(DEBUG)
+    console.log("DEBUG Mode");
 
-cron.schedule("* * * * *", () => {
+app.get('/', (_, res) => {
+    res.send('Hello World!')
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+});
+
+// In debug mode send notif every minute
+cron.schedule(DEBUG ? "* * * * *" : "0 * * * *", () => {
     console.log("Starting notifications");
     job();
 });
