@@ -9,7 +9,6 @@ import {
 
 function getDataFromResponse(res, age) {
     let data = [];
-    let centers = {};
     for (const r of res) {
         /* jshint ignore:start */
         let result = {
@@ -22,8 +21,10 @@ function getDataFromResponse(res, age) {
             to: r.to,
             feeType: r.fee_type,
         };
+        result.sessions = [];
         for (const session of r.sessions) {
             let center = {
+                date: session.date,
                 totalCapacity: session.available_capacity,
                 dose1Capacity: session.available_capacity_dose1,
                 dose2Capacity: session.available_capacity_dose2,
@@ -31,14 +32,11 @@ function getDataFromResponse(res, age) {
                 vaccine: session.vaccine,
                 slots: session.slots,
             };
-            if (center.totalCapacity && age === center.ageLimit)
-                centers = { ...centers, center };
+            if (center.totalCapacity > 0 && age === center.ageLimit)
+                result.sessions.push(center);
         }
         /* jshint ignore:end */
-        if (Object.keys(centers).length) {
-            result.centers = centers;
-            data = [...data, result];
-        }
+        data.push(result);
     }
     return data;
 }
