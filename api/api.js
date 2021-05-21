@@ -118,7 +118,7 @@ async function getCalenderByDistrict(id, date, age, process=true) {
     try {
         const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
         const res = await api.get(url);
-
+        console.log(url);
         if (res.status === 200) {
             const result = res.data.centers;
             if (result !== undefined)
