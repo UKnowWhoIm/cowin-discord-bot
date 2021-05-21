@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import mongoose from "mongoose";
 import { job } from "./cron.js";
 import cron from "node-cron";   
@@ -6,7 +6,7 @@ import { DEBUG, mongoURL } from "./config.js";
 
 
 const app = express();
-const port = process.env.PORT ?? "3000";
+const port = process.env.PORT ?? "3000"; // jshint ignore:line
 
 async function start() {
     try {
@@ -25,12 +25,12 @@ start();
 if(DEBUG)
     console.log("DEBUG Mode");
 
-app.get('/', (_, res) => {
-    res.send('Hello World!')
+app.get("/", (_, res) => {
+    res.send("Hello World!");
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}`);
 });
 
 // In debug mode send notif every minute
