@@ -8,6 +8,7 @@ import {
 
 function getDataFromResponse(res, age) {
     let data = [];
+    let centers = {};
     for (const r of res) {
         /* jshint ignore:start */
         let result = {
@@ -21,17 +22,22 @@ function getDataFromResponse(res, age) {
             feeType: r.fee_type,
         };
         for (const session of r.sessions) {
-            result.totalCapacity = session.available_capacity;
-            result.dose1Capacity = session.available_capacity_dose1;
-            result.dose2Capacity = session.available_capacity_dose2;
-            result.ageLimit = session.min_age_limit;
-            result.vaccine = session.vaccine;
-            result.slots = session.slots;
+            let center = {
+                totalCapacity: session.available_capacity,
+                dose1Capacity: session.available_capacity_dose1,
+                dose2Capacity: session.available_capacity_dose2,
+                ageLimit: session.min_age_limit,
+                vaccine: session.vaccine,
+                slots: session.slots,
+            };
+            if (center.totalCapacity && age === center.ageLimit)
+                centers = { ...centers, center };
         }
         /* jshint ignore:end */
-
-        if (result.totalCapacity && age === result.ageLimit)
+        if (Object.keys(centers).length) {
+            result.centers = centers;
             data = [...data, result];
+        }
     }
     return data;
 }
@@ -84,7 +90,7 @@ async function getDistrictsByStateId(id) {
     }
 }
 
-async function getCalenderByPin(pin, date, age, process=true) {
+async function getCalenderByPin(pin, date, age, process = true) {
     try {
         const res = await api.get(
             `${getCalenderByPinPath}pincode=${pin}&date=${date}`
@@ -95,7 +101,7 @@ async function getCalenderByPin(pin, date, age, process=true) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: (process) ? getDataFromResponse(result, age) : result,
+                    result: process ? getDataFromResponse(result, age) : result,
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -113,7 +119,7 @@ async function getCalenderByPin(pin, date, age, process=true) {
     }
 }
 
-async function getCalenderByDistrict(id, date, age, process=true) {
+async function getCalenderByDistrict(id, date, age, process = true) {
     try {
         const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
         const res = await api.get(url);
@@ -123,7 +129,7 @@ async function getCalenderByDistrict(id, date, age, process=true) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: (process) ? getDataFromResponse(result, age) : result,
+                    result: process ? getDataFromResponse(result, age) : result,
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -146,5 +152,5 @@ export {
     getDistrictsByStateId,
     getCalenderByPin,
     getCalenderByDistrict,
-    getDataFromResponse
+    getDataFromResponse,
 };

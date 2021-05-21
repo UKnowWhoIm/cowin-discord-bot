@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import { job } from "./cron.js";
-import cron from "node-cron";   
+import cron from "node-cron";
 
 config();
 
