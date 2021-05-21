@@ -1,5 +1,6 @@
 import { Command, getAge, getUserID, parseDistrict, processResults, sendReply } from "./common.js";
 import { readUserData } from "../dbCrud.js";
+import { getCalenderByDistrict } from "../api/api.js";
 
 const cmdName = "check";
 
@@ -70,7 +71,12 @@ async function checkAvailability(bot, interaction){
         return sendReply(bot, interaction,
             "Invalid date, please enter date in format dd-mm-yyyy");
     
-    await processResults(bot, interaction, district, date, age);
+    const apiFetch = await getCalenderByDistrict(district, date, age);
+    if(apiFetch.status)
+        processResults(bot, interaction, apiFetch.result);
+    else
+        sendReply(bot, interaction, 
+            "Internal Server Error, Please try again later");
 }
 
 new Command(cmdName, cmdData, checkAvailability);

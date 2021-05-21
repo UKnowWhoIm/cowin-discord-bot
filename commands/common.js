@@ -1,5 +1,4 @@
 import { findBestMatch } from "string-similarity";
-import { getCalenderByDistrict } from "../api/api.js";
 import { getDistricts } from "../dbCrud.js";
 
 export class Command{
@@ -46,7 +45,7 @@ export const getUserID = (interaction) => interaction.member.user.id;
 export const getAge = (age) => age >= 45 ? 45 : 18;
 
 export function sendDM(bot, userId, msg){
-    bot.users.fetch(userId).then(dm => dm.send(msg));
+    bot.users.fetch(userId).then(user => user.send(msg));
 }
 
 export async function parseDistrict(district){
@@ -67,12 +66,11 @@ export async function parseDistrict(district){
     /* jshint ignore:end */
 }
 
-export async function processResults(bot, interaction, district, date, age){
-    const apiFetch = await getCalenderByDistrict(district, date, age);
-    if(apiFetch.status){
-        if(apiFetch.result.length > 0){
-            apiFetch.result.forEach((session) => sendDM(bot, getUserID(interaction),
-            `
+export function processResults(bot, interaction, results, userID){
+    if(results.length > 0){
+        // jshint ignore:start
+        results.forEach((session) => sendDM(bot, userID ?? getUserID(interaction),
+        `
 <<<<<<<< New Center Available >>>>>>>>  
 Center Name: ${session.name}
 Address: ${session.address}
@@ -83,12 +81,12 @@ Dose1 Capacity: ${session.dose1Capacity}
 Dose2 Capacity: ${session.dose2Capacity}
 Age Limit: ${session.ageLimit}`)
             );
-            return sendReply(bot, interaction,
-                "Slots available");
+            // jshint ignore:end
+            if(!userID)
+                return sendReply(bot, interaction,
+                    "Slots available");
         }
-        return sendReply(bot, interaction, 
-            "No slots available");
-    }
-    sendReply(bot, interaction, 
-        "Internal Server Error, Please try again later");
+        if(!userID)
+            return sendReply(bot, interaction, 
+                "No slots available");
 }

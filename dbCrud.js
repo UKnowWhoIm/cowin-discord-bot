@@ -49,8 +49,22 @@ async function deleteUserData(userID) {
     }
 }
 
-async function getDistricts(){
-    return await DistrictModel.find({});
+async function getUsersByFilter(filter){
+    try {
+        let obj = await DataModel.find(filter);
+
+        return obj;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-export { createUser, readUserData, updateUserData, deleteUserData, getDistricts };
+async function getDistricts(){
+    try {
+        return await DistrictModel.find({});
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export { createUser, readUserData, updateUserData, deleteUserData, getDistricts, getUsersByFilter };
