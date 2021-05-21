@@ -1,3 +1,4 @@
+import { IS_PROXY } from "../config.js";
 import {
     api,
     getStatesPath,
@@ -118,9 +119,14 @@ async function getCalenderByDistrict(id, date, age, process=true) {
     try {
         const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
         const res = await api.get(url);
-
+        let result = res.data;
+        
+        if(IS_PROXY)
+            result = result.data.centers;
+        else
+            result = result.centers;
+        
         if (res.status === 200) {
-            const result = res.data.centers;
             if (result !== undefined)
                 return {
                     status: true,
