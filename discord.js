@@ -1,18 +1,18 @@
 import { Client } from "discord.js";
-import { config } from "dotenv";
 import { Command } from "./commands/common.js";
 import "./commands/loadCommands.js";
-
-config();
+import { DEBUG, BOT_TOKEN, GUILD_ID } from "./config.js";
 
 const bot = new Client();
-const TOKEN = process.env.TOKEN;
-const GUILD_ID = process.env.GUILD_ID;
 
 const getApp = (guildId) => {
-	return bot.api
-		.applications(bot.user.id)
-		.guilds(guildId);
+	const app = bot.api.applications(bot.user.id);
+	
+	if(DEBUG)
+		return app.guilds(guildId);
+	
+	return app;
+		
 };
 
 const botCmdMap = Command.getCallBackMap();
@@ -31,4 +31,4 @@ bot.once("ready", async () => {
 	});
 });
 
-bot.login(TOKEN);
+bot.login(BOT_TOKEN);

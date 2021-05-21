@@ -1,15 +1,11 @@
 import mongoose from "mongoose";
-import { config } from "dotenv";
 import { job } from "./cron.js";
 import cron from "node-cron";   
-
-config();
-
-const url = process.env.MONGODB_SRV;
+import { DEBUG, mongoURL } from "./config.js";
 
 async function start() {
     try {
-        await mongoose.connect(url, {
+        await mongoose.connect(mongoURL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
@@ -20,8 +16,11 @@ async function start() {
 }
 
 start();
+if(DEBUG)
+    console.log("DEBUG Mode");
 
-cron.schedule("* * * * *", () => {
+// In debug mode send notif every minute
+cron.schedule(DEBUG ? "* * * * *" : "0 * * * *", () => {
     console.log("Starting notifications");
     job();
 });
