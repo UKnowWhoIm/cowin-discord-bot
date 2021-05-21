@@ -4,12 +4,14 @@ import { job } from "./cron.js";
 import cron from "node-cron";   
 import { DEBUG, mongoURL } from "./config.js";
 
+
 const app = express();
 const port = process.env.PORT ?? "3000"; // jshint ignore:line
 
 async function start() {
     try {
         await mongoose.connect(mongoURL, {
+            useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,

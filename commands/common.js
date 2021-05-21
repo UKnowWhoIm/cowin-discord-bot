@@ -66,22 +66,31 @@ export async function parseDistrict(district){
     /* jshint ignore:end */
 }
 
-export function processResults(bot, interaction, results, userID){
-    if(results.length > 0){
-        // jshint ignore:start
-        results.forEach((session) => sendDM(bot, userID ?? getUserID(interaction),
-        `
-<<<<<<<< New Center Available >>>>>>>>  
-Center Name: ${session.name}
-Address: ${session.address}
-PinCode: ${session.pincode}
-Fee Type: ${session.feeType}
+function getSessionText(sessions){
+    console.log(sessions);
+    let result = "";
+    sessions.forEach((session) => result += `
+-------- DATE: ${session.date} --------
+Age Limit: ${session.ageLimit}
 Vaccine: ${session.vaccine}
 Dose1 Capacity: ${session.dose1Capacity}
-Dose2 Capacity: ${session.dose2Capacity}
-Age Limit: ${session.ageLimit}`)
-            );
-            // jshint ignore:end
+Dose2 Capacity: ${session.dose2Capacity}`);
+    return result;
+}
+
+export function processResults(bot, interaction, results, userID){
+    if(results.length > 0){
+        let msg = "";
+        results.forEach((center) => msg += `
+<<<<<<<< New Center Available >>>>>>>>
+Center Name: ${center.name}
+Address: ${center.address}
+Pincode: ${center.pincode}
+Fee Type: ${center.feeType} ${getSessionText(center.sessions)}
+
+`);
+            sendDM(bot, userID ?? getUserID(interaction), msg); // jshint ignore:line
+            
             if(!userID)
                 return sendReply(bot, interaction,
                     "Slots available");
