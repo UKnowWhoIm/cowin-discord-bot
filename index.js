@@ -10,6 +10,7 @@ const url = process.env.MONGODB_SRV;
 async function start() {
     try {
         await mongoose.connect(url, {
+            useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
