@@ -8,7 +8,7 @@
 
 /*---------Colors ---------*/
 :root {
-    --first-color: #496BFC;
+    --first-color: #496bfc;
     --second-color: #0e2431;
 }
 
@@ -103,6 +103,12 @@ img {
 .section {
     padding-top: 3rem;
     padding-bottom: 2rem;
+}
+.code {
+    background: var(--first-color);
+    border-radius: var(--mb-2);
+    padding: 0 1rem;
+    color: #fff;
 }
 
 /*---------LAYOUT ---------*/
@@ -235,6 +241,15 @@ img {
 }
 .button:hover {
     box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------about ---------*/
+.about__container {
+    row-gap: 2rem;
+    text-align: center;
+}
+.about__subtitle {
+    margin-bottom: var(--mb-2);
 }
 
 /* ---------features ---------*/

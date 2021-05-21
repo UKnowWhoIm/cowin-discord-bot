@@ -30,7 +30,13 @@
                             <a href="#home" class="nav__link active">Home</a>
                         </li>
                         <li class="nav__item">
+                            <a href="#about" class="nav__link">About</a>
+                        </li>
+                        <li class="nav__item">
                             <a href="#features" class="nav__link">Features</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#features" class="nav__link">Commands</a>
                         </li>
                     </ul>
                 </div>
@@ -54,8 +60,7 @@
                         <br />with the vaccination centers in your district.
                     </h3>
                     <br />
-
-                    <a href="#" class="button">Get Cowin Assist</a>
+                    <a href="#" class="button">Add to Server</a>
                 </div>
 
                 <div class="home__github">
@@ -71,18 +76,36 @@
                 </div>
             </section>
 
-            <!-- features -->
-            <section class="features section" id="features">
-                <h2 class="section-title">Features</h2>
+            <!-- about -->
+            <section class="about section" id="about">
+                <h2 class="section-title">About</h2>
 
                 <div class="features__container bd-grid">
                     <div class="features__img">
                         <img
-                            src="assets/images/features.jpg"
+                            src="assets/images/about.jpg"
                             alt="Get Vaccinated"
                         />
                     </div>
+                    <p class="about__text">
+                        Cowin Assist is a chat-bot that lets the user track the
+                        availability of covid vaccination centres in India via
+                        the
+                        <a href="https://apisetu.gov.in/public/api/cowin#/"
+                            >CoWin API</a
+                        >. It has a bunch of commands through which the user can
+                        set/update their desired filters to receive up to date
+                        information regarding the vaccine centres.
+                    </p>
+                </div>
+                <br />
+            </section>
 
+            <!-- features -->
+            <section class="features section" id="features">
+                <h2 class="section-title">Features & Commands</h2>
+
+                <div class="features__container bd-grid">
                     <div>
                         <p class="features__text">
                             <li>Add the discord bot to a server</li>
@@ -101,6 +124,28 @@
                                 available
                             </li>
                             <li>Unsubscribe from the hourly update</li>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="features__text">
+                            <li>
+                                <span class="code">/check</span> to manually
+                                check for available slots with the given
+                                parameters.
+                            </li>
+                            <li>
+                                <span class="code">/help</span> to show the list
+                                of available commands.
+                            </li>
+                            <li>
+                                <span class="code">/notify-me</span> to enable
+                                hourly notifications for the user if slot is
+                                avaiilable.
+                            </li>
+                            <li>
+                                <span class="code">/set</span> to set the user's
+                                age and district in the db.
+                            </li>
                         </p>
                     </div>
                     <br />
