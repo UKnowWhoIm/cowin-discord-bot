@@ -4,7 +4,6 @@
 
 <!--ts-->
 
--   [Table of contents](#table-of-contents)
 -   [Features](#features)
 -   [Demo](#demo)
     -   [BOT](#bot)
