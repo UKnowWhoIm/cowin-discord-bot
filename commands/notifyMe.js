@@ -1,18 +1,30 @@
-import { Command, sendReply, sendDM } from "./common.js";
+import { readUserData, updateUserData } from "../dbCrud.js";
+import { Command, sendReply } from "./common.js";
 
-const name = "notify-me";
+const cmdName = "notify-me";
 
 const commandData = {
-    "name": "notify-me",
+    "name": cmdName,
     "description": "Send hourly alerts if slot is available"
 };
 
-function addUserToListners(bot, interaction){
+async function addUserToListners(bot, interaction){
     const user = interaction.member.user;
-    console.log(user);
-    sendReply(bot, interaction, `User ${user.id} subscribed`);
+    
+    const userInDB = await readUserData(user.id);
+    
+    // jshint ignore:start
+    if(!userInDB?.district)
+        return sendReply(bot, interaction,
+            "Set your district using /set command to recieve hourly notifications");
+    if(!userInDB?.age)
+        return sendReply(bot, interaction,
+            "Set your age using /set command to recieve hourly notifications")
+    // jshint ignore:end
 
-    //sendDM(bot, user.id, `User ${user.id} subscribed`)
+    updateUserData(user.id, {"notify": true});
+    sendReply(bot, interaction, `You have subscribed to hourly notifications`);
+    
 }
 
-new Command(name, commandData, addUserToListners);
+new Command(cmdName, commandData, addUserToListners);

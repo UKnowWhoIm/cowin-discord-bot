@@ -7,6 +7,7 @@ import {
 } from "./helper.js";
 
 function getDataFromResponse(res, age) {
+    // age is null for no filter
     let data = [];
     for (const r of res) {
         /* jshint ignore:start */
@@ -28,7 +29,7 @@ function getDataFromResponse(res, age) {
         /* jshint ignore:end */
         if (
             (result.dose1Capacity !== 0 || result.dose2Capacity !== 0) &&
-            age === result.ageLimit
+            age === result.ageLimit || age === null
         )
             data = [...data, result];
     }
@@ -40,7 +41,6 @@ async function getStates() {
         const res = await api.get(getStatesPath);
 
         if (res.status === 200) {
-            console.log(res);
             if (res.data.states !== undefined)
                 return {
                     status: true,
@@ -115,9 +115,8 @@ async function getCalenderByPin(pin, date, age) {
 
 async function getCalenderByDistrict(id, date, age) {
     try {
-        const res = await api.get(
-            `${getCalenderByDistrictPath}district_id=${id}&date=${date}`
-        );
+        const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
+        const res = await api.get(url);
 
         if (res.status === 200) {
             const result = res.data.centers;

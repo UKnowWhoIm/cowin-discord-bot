@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { config } from "dotenv";
+import { job } from "./cron.js";
+import cron from "node-cron";   
 
 config();
 
@@ -18,4 +20,10 @@ async function start() {
 }
 
 start();
+
+cron.schedule("* * * * *", () => {
+    console.log("Starting notifications");
+    job();
+});
+
 import "./discord.js";
