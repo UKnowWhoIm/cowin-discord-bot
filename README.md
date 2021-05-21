@@ -1,15 +1,16 @@
 ![Cowin Assist](images/header.png)
 
 ### Features
-The Cowin Assist Bot lets you,
-* To add discord bot to a server,
+The Cowin Assist lets you,
+* To add the discord bot to a server,
 * Register your district, pincode and age (just once, we'll save it for you),
 * Update your saved data if needed,
 * Check for the availability of a vaccine center using the data provided,
 * Navigate to COWIN site if slot available,
-* Enable hourly update on open slots if available.
+* Subscribe for hourly update on open slots if available,
+* Unsubscribe from the hourly update.
 
-For detailed information regarding the slash commands checkout [this](commands/README.md) out.
+For detailed information regarding the slash commands check [this](commands/README.md) out.
 
 ### Demo
 
