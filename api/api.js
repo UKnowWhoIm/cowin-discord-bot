@@ -21,13 +21,14 @@ function getDataFromResponse(res, age) {
             feeType: r.fee_type,
         };
         for (const session of r.sessions) {
+            result.totalCapacity = session.available_capacity;
             result.dose1Capacity = session.available_capacity_dose1;
             result.dose2Capacity = session.available_capacity_dose2;
             result.ageLimit = session.min_age_limit;
             result.vaccine = session.vaccine;
             result.slots = session.slots;
         }
-        if (session.available_capacity && age === result.ageLimit)
+        if (result.totalCapacity && age === result.ageLimit)
             data = [...data, result];
 
         /* jshint ignore:end */
