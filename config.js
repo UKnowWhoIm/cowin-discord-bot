@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config();
 
-export const DEBUG = (process.env.DEBUG ?? "true") !== "false";
+export const DEBUG = (process.env.DEBUG ?? "true") !== "false"; // jshint ignore:line
 
 export const mongoURL = process.env.MONGODB_SRV;
 
