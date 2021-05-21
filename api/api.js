@@ -27,9 +27,10 @@ function getDataFromResponse(res, age) {
             result.vaccine = session.vaccine;
             result.slots = session.slots;
         }
-        /* jshint ignore:end */
         if (session.available_capacity && age === result.ageLimit)
             data = [...data, result];
+
+        /* jshint ignore:end */
     }
     return data;
 }
