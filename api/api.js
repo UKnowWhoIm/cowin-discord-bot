@@ -7,7 +7,6 @@ import {
 } from "./helper.js";
 
 function getDataFromResponse(res, age) {
-    // age is null for no filter
     let data = [];
     for (const r of res) {
         /* jshint ignore:start */
@@ -29,7 +28,7 @@ function getDataFromResponse(res, age) {
         /* jshint ignore:end */
         if (
             (result.dose1Capacity !== 0 || result.dose2Capacity !== 0) &&
-            age === result.ageLimit || age === null
+            age === result.ageLimit
         )
             data = [...data, result];
     }
@@ -84,7 +83,7 @@ async function getDistrictsByStateId(id) {
     }
 }
 
-async function getCalenderByPin(pin, date, age) {
+async function getCalenderByPin(pin, date, age, process=true) {
     try {
         const res = await api.get(
             `${getCalenderByPinPath}pincode=${pin}&date=${date}`
@@ -95,7 +94,7 @@ async function getCalenderByPin(pin, date, age) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: getDataFromResponse(result, age),
+                    result: (process) ? getDataFromResponse(result, age) : result,
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -113,7 +112,7 @@ async function getCalenderByPin(pin, date, age) {
     }
 }
 
-async function getCalenderByDistrict(id, date, age) {
+async function getCalenderByDistrict(id, date, age, process=true) {
     try {
         const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
         const res = await api.get(url);
@@ -123,7 +122,7 @@ async function getCalenderByDistrict(id, date, age) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: getDataFromResponse(result, age),
+                    result: (process) ? getDataFromResponse(result, age) : result,
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -146,4 +145,5 @@ export {
     getDistrictsByStateId,
     getCalenderByPin,
     getCalenderByDistrict,
+    getDataFromResponse
 };

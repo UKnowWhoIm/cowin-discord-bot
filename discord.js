@@ -24,7 +24,6 @@ bot.once("ready", async () => {
 	Command.initialize(getApp(GUILD_ID).commands.post);
 
 	bot.ws.on("INTERACTION_CREATE", async (interaction) => {
-		console.log(interaction.member);
 		const command = interaction.data.name;
 		
 		if(botCmdMap[command])

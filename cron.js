@@ -1,11 +1,7 @@
 import { getUsersByFilter } from "./dbCrud.js";
-import { getCalenderByDistrict } from "./api/api.js";
+import { getCalenderByDistrict, getDataFromResponse } from "./api/api.js";
 import { Client } from "discord.js";
 import { processResults } from "./commands/common.js";
-
-function filterByAge(results, minAge){
-    return results.filter((result) => result.ageLimit === minAge);
-}
 
 async function initilizeBot(){
     const TOKEN = process.env.TOKEN;
@@ -33,13 +29,11 @@ export async function job(){
     const subscribedUsers = await getUsersByFilter({"notify": true});
     for(const user of subscribedUsers){
         if(cache[user.district] === undefined){
-            const apiFetch = await getCalenderByDistrict(user.district, getDate(), null);
+            const apiFetch = await getCalenderByDistrict(user.district, getDate(), null, false);
             if(apiFetch.status)
                 cache[user.district] = apiFetch.result;
         } 
-        const results = filterByAge(cache[user.district], user.age);
+        const results = getDataFromResponse(cache[user.district], user.age);
         processResults(bot, null, results, user.userID);
     }
-    // Dump Cache After Use
-    cache = {};
 }
