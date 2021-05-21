@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_BASE } from "../config.js";
 
 const api = axios.create({
-    baseURL: "https://cdn-api.co-vin.in/api/v2/",
+    baseURL: API_BASE,
     headers: {
         accept: "application/json",
         "User-Agent":
