@@ -13,7 +13,7 @@ function getDataFromResponse(res, age) {
         let result = {
             centerId: r.center_id,
             name: r.name,
-            address:r.address,
+            address: r.address,
             pincode: r.pincode,
             blockName: r.block_name,
             from: r.from,
@@ -28,10 +28,7 @@ function getDataFromResponse(res, age) {
             result.slots = session.slots;
         }
         /* jshint ignore:end */
-        if (
-            (result.dose1Capacity !== 0 || result.dose2Capacity !== 0) &&
-            age === result.ageLimit
-        )
+        if (session.available_capacity && age === result.ageLimit)
             data = [...data, result];
     }
     return data;
@@ -42,7 +39,6 @@ async function getStates() {
         const res = await api.get(getStatesPath);
 
         if (res.status === 200) {
-            console.log(res);
             if (res.data.states !== undefined)
                 return {
                     status: true,
