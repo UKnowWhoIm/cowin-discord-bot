@@ -33,6 +33,8 @@ For detailed information regarding the slash commands check [this](commands/READ
 #### Bot
 
 #### Web Interface
+![Web Interface Image](images/web1.png)
+![Web Interface Image](images/web2.png)
 
 ### How to add the bot to your server?
 
