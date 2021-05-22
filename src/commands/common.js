@@ -44,8 +44,9 @@ export const getUserID = (interaction) => interaction.member.user.id;
 
 export const getAge = (age) => age >= 45 ? 45 : 18;
 
-export function sendDM(bot, userId, msg){
-    bot.users.fetch(userId).then(user => user.send(msg));
+export async function sendDM(bot, userId, msg){
+    const user = await bot.users.fetch(userId);
+    user.send(msg);
 }
 
 export async function parseDistrict(district){
@@ -77,25 +78,26 @@ Dose2 Capacity: ${session.dose2Capacity}`);
     return result;
 }
 
-export function processResults(bot, interaction, results, userID){
+export async function processResults(bot, interaction, results, userID){
     if(results.length > 0){
+        if(!userID)
+            sendReply(bot, interaction,
+                "Slots available");
         // jshint ignore:start
-        results.forEach((center) => sendDM(bot, userID ?? getUserID(interaction), `
+        for(const center of results)
+            await sendDM(bot, userID ?? getUserID(interaction), `
 <<<<<<<< New Center Available >>>>>>>>
 Center Name: ${center.name}
 Address: ${center.address}
 Pincode: ${center.pincode}
-Fee Type: ${center.feeType} ${getSessionText(center.sessions)}
-`));
+Fee Type: ${center.feeType} ${getSessionText(center.sessions)}`);
         
-        sendDM(bot, userID ?? getUserID(interaction),
+        return sendDM(bot, userID ?? getUserID(interaction),
 `Register Now: https://www.cowin.gov.in/home
-I'm a bot, so don't reply....
+***I'm a bot, so don't reply***....
 `);
         // jshint ignore:end
-            if(!userID)
-                return sendReply(bot, interaction,
-                    "Slots available");
+            
         }
         if(!userID)
             return sendReply(bot, interaction, 
