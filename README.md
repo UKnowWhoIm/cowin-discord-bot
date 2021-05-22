@@ -1,4 +1,4 @@
-![Cowin Assist](images/header.png)
+![Cowin Assist](src/images/header.png)
 
 ### Table of contents
 
@@ -31,7 +31,7 @@ The Cowin Assist lets you,
 -   Subscribe for an hourly update on open slots if available,
 -   Unsubscribe from the hourly update.
 
-For detailed information regarding the slash commands check [this](commands/README.md) out.
+For detailed information regarding the slash commands check [this](src/commands/README.md) out.
 
 ### How to add the bot to your server?
 
@@ -47,8 +47,8 @@ For detailed information regarding the slash commands check [this](commands/READ
 
 #### Web Interface
 
-![Web Interface Image](images/web1.png)
-![Web Interface Image](images/web2.png)
+![Web Interface Image](src/images/web1.png)
+![Web Interface Image](src/images/web2.png)
 
 ### Contributing
 
