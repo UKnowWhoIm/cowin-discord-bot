@@ -67,7 +67,6 @@ export async function parseDistrict(district){
 }
 
 function getSessionText(sessions){
-    console.log(sessions);
     let result = "";
     sessions.forEach((session) => result += `
 -------- DATE: ${session.date} --------
@@ -80,17 +79,15 @@ Dose2 Capacity: ${session.dose2Capacity}`);
 
 export function processResults(bot, interaction, results, userID){
     if(results.length > 0){
-        let msg = "";
-        results.forEach((center) => msg += `
+        // jshint ignore:start
+        results.forEach((center) => sendDM(bot, userID ?? getUserID(interaction), `
 <<<<<<<< New Center Available >>>>>>>>
 Center Name: ${center.name}
 Address: ${center.address}
 Pincode: ${center.pincode}
 Fee Type: ${center.feeType} ${getSessionText(center.sessions)}
-
-`);
-            sendDM(bot, userID ?? getUserID(interaction), msg); // jshint ignore:line
-            
+`));
+        // jshint ignore:end
             if(!userID)
                 return sendReply(bot, interaction,
                     "Slots available");
