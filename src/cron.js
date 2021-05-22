@@ -1,4 +1,4 @@
-import { getUsersByFilter } from "./dbCrud.js";
+import { bulkCreateCacheDistrict, clearCache, getUsersByFilter } from "./dbCrud.js";
 import { getCalenderByDistrict, getDataFromResponse } from "./api/api.js";
 import { Client } from "discord.js";
 import { processResults } from "./commands/common.js";
@@ -23,7 +23,20 @@ function getDate(){
     return `${padLeft(date.getDate())}-${padLeft(date.getMonth() + 1)}-${date.getFullYear()}`;
 }
 
+function processDataForStorage(cached){
+    // Convert to list of objects for db storage
+    let finalData = [];
+    for(const key of Object.keys(cached)){
+        finalData.push({
+            "district": key,
+            "data": cached[key]
+        });
+    }
+    return finalData;
+}
+
 export async function job(){
+    await clearCache();
     let cache = {};
     const bot = await initilizeBot();
     const subscribedUsers = await getUsersByFilter({"notify": true});
@@ -36,4 +49,5 @@ export async function job(){
         const results = getDataFromResponse(cache[user.district], user.age);
         processResults(bot, null, results, user.userID);
     }
+    bulkCreateCacheDistrict(processDataForStorage(cache));
 }
