@@ -35,7 +35,7 @@ For detailed information regarding the slash commands check [this](src/commands/
 
 ### Workflow
 
-For detailed understanding of the working of the project refer the [flowchart](src/commands/README.md) that we have prepared.
+For detailed understanding of the working of the project refer the [flowchart](https://drive.google.com/file/d/1H6qJQC6MelXA9a2Cfa4C5RY3QZ_ydB3e/view?usp=sharing) that we have prepared.
 
 ### How to add the bot to your server?
 
@@ -50,10 +50,10 @@ For detailed understanding of the working of the project refer the [flowchart](s
 #### Bot
 
 <div float="left">
-    <img src="src/images/1.jpg"  width="200" height="345"  hspace="10">
-    <img src="src/images/4.jpg" width="200" height="345" hspace="10">
-    <img src="src/images/2.jpg" width="200" height="345"  hspace="10">
-    <img src="src/images/3.jpg" width="200" height="345"  hspace="10">
+    <img src="src/images/1.jpg"  width="200" height="345"  hspace="5">
+    <img src="src/images/4.jpg" width="200" height="345" hspace="5">
+    <img src="src/images/2.jpg" width="200" height="345"  hspace="5">
+    <img src="src/images/3.jpg" width="200" height="345"  hspace="5">
 </div>
 
 #### Web Interface
