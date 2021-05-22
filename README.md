@@ -6,10 +6,10 @@
 
 -   [What is Cowin Assist?](#what-is-cowin-assist)
 -   [Features](#features)
+-   [How to add the bot to your server?](#how-to-add-the-bot-to-your-server)
 -   [Demo](#demo)
     -   [BOT](#bot)
     -   [Web Interface](#web-interface)
--   [How to add the bot to your server?](#how-to-add-the-bot-to-your-server)
 -   [Contributing](#contributing)
     -   [Requirements](#requirements)
 -   [License](#license)
@@ -33,6 +33,14 @@ The Cowin Assist lets you,
 
 For detailed information regarding the slash commands check [this](commands/README.md) out.
 
+### How to add the bot to your server?
+
+1. Visit the official Cowin Assist Bot's website and click on the **Add to server** button.
+2. Then login or register with your discord server.
+3. After logging in, select the server from the list where you wish to display the Bot.
+4. Provide authorization for the Bot to regulate and control your discord server.
+5. Check the **Add the bot to a server** and press the **Authorize** option.
+
 ### Demo
 
 #### Bot
@@ -41,14 +49,6 @@ For detailed information regarding the slash commands check [this](commands/READ
 
 ![Web Interface Image](images/web1.png)
 ![Web Interface Image](images/web2.png)
-
-### How to add the bot to your server?
-
-1. Visit the official Cowin Assist Bot's website and click on the **Add to server** button.
-2. Then login or register with your discord server.
-3. After logging in, select the server from the list where you wish to display the Bot.
-4. Provide authorization for the Bot to regulate and control your discord server.
-5. Check the **Add the bot to a server** and press the **Authorize** option.
 
 ### Contributing
 
