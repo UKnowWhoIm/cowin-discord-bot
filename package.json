@@ -1,6 +1,6 @@
 {
   "name": "cowin-discord-bot",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "A discord app to get upcoming COWIN appointments based on commands",
   "main": "./src/index.js",
   "type": "module",
