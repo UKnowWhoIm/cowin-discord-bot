@@ -42,6 +42,10 @@ app.listen(port, () => {
 cron.schedule(DEBUG ? "* * * * *" : "0 * * * *", () => {
     console.log("Starting notifications");
     job();
-});
+},
+{
+    "timezone": "Asia/Kolkata"
+}
+);
 
 import "./discord.js";
