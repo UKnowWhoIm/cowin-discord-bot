@@ -1,4 +1,5 @@
 import { IS_PROXY } from "../config.js";
+import { DateTime } from "luxon";
 import {
     api,
     getStatesPath,
@@ -7,10 +8,12 @@ import {
     getCalenderByDistrictPath,
 } from "./helper.js";
 
-function getDataFromResponse(res, age) {
+function getDataFromResponse(res, age, date) {
     let data = [];
+    let flag = 0;
     for (const r of res) {
         /* jshint ignore:start */
+        flag = 0;
         let result = {
             centerId: r.center_id,
             name: r.name,
@@ -23,20 +26,29 @@ function getDataFromResponse(res, age) {
         };
         result.sessions = [];
         for (const session of r.sessions) {
-            let center = {
-                date: session.date,
-                totalCapacity: session.available_capacity,
-                dose1Capacity: session.available_capacity_dose1,
-                dose2Capacity: session.available_capacity_dose2,
-                ageLimit: session.min_age_limit,
-                vaccine: session.vaccine,
-                slots: session.slots,
-            };
-            if (center.totalCapacity > 0 && age === center.ageLimit)
-                result.sessions.push(center);
+            let d1 = DateTime.fromFormat(session.date, "dd-MM-yyyy").startOf(
+                "day"
+            );
+            let d2 = DateTime.fromFormat(date, "dd-MM-yyyy").startOf("day");
+            if (d1 >= d2) {
+                let center = {
+                    date: session.date,
+                    totalCapacity: session.available_capacity,
+                    dose1Capacity: session.available_capacity_dose1,
+                    dose2Capacity: session.available_capacity_dose2,
+                    ageLimit: session.min_age_limit,
+                    vaccine: session.vaccine,
+                    slots: session.slots,
+                };
+                if (center.totalCapacity > 0 && age === center.ageLimit) {
+                    result.sessions.push(center);
+                    flag = 1;
+                }
+            }
         }
         /* jshint ignore:end */
-        data.push(result);
+        if (flag === 1)
+            data.push(result);
     }
     return data;
 }
@@ -118,24 +130,24 @@ async function getCalenderByPin(pin, date, age, process = true) {
     }
 }
 
-async function getCalenderByDistrict(id, date, age, process = true) {
+async function getCalenderByDistrict(id) {
     try {
-        const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
+        console.log("API CALL");
+        const today = DateTime.now().toFormat("dd-MM-yyyy");
+        const url = `${getCalenderByDistrictPath}district_id=${id}&date=${today}`;
         const res = await api.get(url);
         let result = res.data;
-        
-        if(IS_PROXY)
-            result = result.data.centers;
-        else
-            result = result.centers;
-        
+
+        if (IS_PROXY) result = result.data.centers;
+        else result = result.centers;
+
         if (res.status === 200) {
-            if (result !== undefined)
+            if (result !== undefined) {
                 return {
                     status: true,
-                    result: process ? getDataFromResponse(result, age) : result,
+                    result: result,
                 };
-            else throw new Error("Centers are undefined");
+            } else throw new Error("Centers are undefined");
         } else {
             if (res.status === 400) throw new Error(res.error);
 
@@ -144,6 +156,7 @@ async function getCalenderByDistrict(id, date, age, process = true) {
             if (res.status === 500) throw new Error("Internal Server Error");
         }
     } catch (e) {
+        console.log(e);
         return {
             status: false,
             message: e.message,
