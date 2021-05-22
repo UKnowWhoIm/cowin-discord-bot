@@ -1,8 +1,9 @@
+import { CacheModel } from "./models/cache.js";
 import { DataModel } from "./models/dataSchema.js";
 import { DistrictModel } from "./models/district.js";
 
 // set
-async function createUser(userID, userData) {
+export async function createUser(userID, userData) {
     const info = {
         userID: userID,
         district: userData.district,
@@ -21,9 +22,9 @@ async function createUser(userID, userData) {
 }
 
 // check
-async function readUserData(userID) {
+export async function readUserData(userID) {
     try {
-        let obj = await DataModel.findOne({"userID": userID});
+        let obj = await DataModel.findOne({ userID: userID });
 
         return obj;
     } catch (error) {
@@ -32,7 +33,7 @@ async function readUserData(userID) {
 }
 
 // set
-async function updateUserData(userID, data) {
+export async function updateUserData(userID, data) {
     const filter = { userID: userID };
     try {
         await DataModel.findOneAndUpdate(filter, data, { upsert: true });
@@ -41,7 +42,7 @@ async function updateUserData(userID, data) {
     }
 }
 
-async function deleteUserData(userID) {
+export async function deleteUserData(userID) {
     try {
         await DataModel.deleteOne(userID);
     } catch (error) {
@@ -49,7 +50,7 @@ async function deleteUserData(userID) {
     }
 }
 
-async function getUsersByFilter(filter){
+export async function getUsersByFilter(filter) {
     try {
         let obj = await DataModel.find(filter);
 
@@ -59,12 +60,51 @@ async function getUsersByFilter(filter){
     }
 }
 
-async function getDistricts(){
+export async function getDistricts() {
     try {
         return await DistrictModel.find({});
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
-export { createUser, readUserData, updateUserData, deleteUserData, getDistricts, getUsersByFilter };
+export async function getAllCachedDistricts() {
+    try {
+        return await CacheModel.find({});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getCachedDistrict(districtId) {
+    try {
+        return await CacheModel.findOne({ district: districtId });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function createCacheDistrict(data) {
+    try {
+        let obj = await CacheModel.create(data);
+        await obj.save();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function bulkCreateCacheDistrict(data) {
+    try {
+        await CacheModel.insertMany(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function clearCache() {
+    try {
+        await CacheModel.deleteMany({});
+    } catch (error) {
+        console.log(error);
+    }
+}
