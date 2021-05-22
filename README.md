@@ -38,32 +38,34 @@ For detailed information regarding the slash commands check [this](src/commands/
 For detailed understanding of the working of the project refer the [flowchart](https://drive.google.com/file/d/1H6qJQC6MelXA9a2Cfa4C5RY3QZ_ydB3e/view?usp=sharing) that we have prepared.
 
 ### How to add the bot to your server?
-
-1. Visit the **Cowin Assist Bot's** [website](https://cowin-discord-bot-1.uknowwhoim.repl.co/) and click on the **Add to server** button.
-2. Then login or register with your discord server.
-3. After logging in, select the server from the list where you wish to display the Bot.
-4. Provide authorization for the Bot to regulate and control your discord server.
-5. Check the **Add the bot to a server** and press the **Authorize** option.
+1. Ensure that you have the latest version of the discord client
+2. Visit the **Cowin Assist Bot's** [website](https://cowin-discord-bot-1.uknowwhoim.repl.co/) and click on the **Add to server** button.
+3. Then login or register with your discord server.
+4. After logging in, select the server from the list where you wish to display the Bot.
+5. Provide authorization for the Bot to regulate and control your discord server.
+6. Check the **Add the bot to a server** and press the **Authorize** option.
 
 ### Demo
 
 #### Bot
 
 <div float="left">
-    <img src="src/images/1.jpg"  width="200" height="345"  hspace="5">
-    <img src="src/images/4.jpg" width="200" height="345" hspace="5">
-    <img src="src/images/2.jpg" width="200" height="345"  hspace="5">
-    <img src="src/images/3.jpg" width="200" height="345"  hspace="5">
+    <img src="src/images/1.jpg"  width="200" height="345">
+    <img src="src/images/4.jpg" width="200" height="345">
+    <img src="src/images/2.jpg" width="200" height="345">
+    <img src="src/images/3.jpg" width="200" height="345">
 </div>
 
 #### Web Interface
 
 <div float="left">
-    <img src="src/images/web1.png" width="450" hspace="10">
-    <img src="src/images/web2.png" width="450" hspace="10">
+    <img src="src/images/web1.png" width="450">
+    <img src="src/images/web2.png" width="450">
 </div>
 
 ### Contributing
+
+You may notice sever `jshint ignore` comments in the code. It's because JSHint has not yet released support for optional chaining(`.?`). The feature is in the works for [v2.13](https://github.com/jshint/jshint/pull/3486). This is a temporary fix until they release `v2.13`
 
 #### Requirements
 
