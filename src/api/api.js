@@ -9,7 +9,6 @@ import {
 } from "./helper.js";
 
 function getDataFromResponse(res, age, date) {
-    console.log(res);
     let data = [];
     let flag = 0;
     for (const r of res) {
@@ -26,10 +25,13 @@ function getDataFromResponse(res, age, date) {
         };
         result.sessions = [];
         for (const session of r.sessions) {
-            let d1 = DateTime.fromFormat(session.date, "dd-MM-yyyy");
-            let d2 = DateTime.fromFormat(date, "dd-MM-yyyy");
-            console.log(d1 < d2);
-            if (d1 < d2) {
+            let d1 = DateTime.fromFormat(session.date, "dd-MM-yyyy").startOf(
+                "day"
+            );
+            let d2 = DateTime.fromFormat(date, "dd-MM-yyyy").startOf("day");
+            console.log(d1 >= d2);
+            //    console.log(d1, d2);
+            if (d1 >= d2) {
                 let center = {
                     date: session.date,
                     totalCapacity: session.available_capacity,
@@ -42,7 +44,6 @@ function getDataFromResponse(res, age, date) {
                 if (center.totalCapacity > 0 && age === center.ageLimit) {
                     result.sessions.push(center);
                     flag = 1;
-                    console.log("hi");
                 }
             }
         }
@@ -52,7 +53,6 @@ function getDataFromResponse(res, age, date) {
             flag = 0;
         }
     }
-    console.log(data);
     return data;
 }
 
@@ -144,7 +144,6 @@ async function getCalenderByDistrict(id, date, age) {
 
         if (res.status === 200) {
             if (result !== undefined) {
-                console.log("blah");
                 return {
                     status: true,
                     result: result,
@@ -158,7 +157,6 @@ async function getCalenderByDistrict(id, date, age) {
             if (res.status === 500) throw new Error("Internal Server Error");
         }
     } catch (e) {
-        console.log(e);
         return {
             status: false,
             message: e.message,
