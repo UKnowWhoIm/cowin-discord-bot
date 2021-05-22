@@ -29,8 +29,7 @@ function getDataFromResponse(res, age, date) {
                 "day"
             );
             let d2 = DateTime.fromFormat(date, "dd-MM-yyyy").startOf("day");
-            console.log(d1 >= d2);
-            //    console.log(d1, d2);
+
             if (d1 >= d2) {
                 let center = {
                     date: session.date,
