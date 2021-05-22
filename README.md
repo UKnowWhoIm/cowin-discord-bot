@@ -50,17 +50,17 @@ For detailed understanding of the working of the project refer the [flowchart](s
 #### Bot
 
 <div float="left">
-    <img src="src/images/1.jpg"  width="200" height="345"  hspace="15">
-    <img src="src/images/4.jpg" width="200" height="345" hspace="15">
-    <img src="src/images/2.jpg" width="200" height="345"  hspace="15">
-    <img src="src/images/3.jpg" width="200" height="345"  hspace="15">
+    <img src="src/images/1.jpg"  width="200" height="345"  hspace="10">
+    <img src="src/images/4.jpg" width="200" height="345" hspace="10">
+    <img src="src/images/2.jpg" width="200" height="345"  hspace="10">
+    <img src="src/images/3.jpg" width="200" height="345"  hspace="10">
 </div>
 
 #### Web Interface
 
 <div float="left">
-    <img src="src/images/web1.png" width="450" hspace="15">
-    <img src="src/images/web2.png" width="450" hspace="15">
+    <img src="src/images/web1.png" width="450" hspace="10">
+    <img src="src/images/web2.png" width="450" hspace="10">
 </div>
 
 ### Contributing
