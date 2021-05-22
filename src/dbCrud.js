@@ -24,7 +24,7 @@ export async function createUser(userID, userData) {
 // check
 export async function readUserData(userID) {
     try {
-        let obj = await DataModel.findOne({"userID": userID});
+        let obj = await DataModel.findOne({ userID: userID });
 
         return obj;
     } catch (error) {
@@ -50,7 +50,7 @@ export async function deleteUserData(userID) {
     }
 }
 
-export async function getUsersByFilter(filter){
+export async function getUsersByFilter(filter) {
     try {
         let obj = await DataModel.find(filter);
 
@@ -60,31 +60,31 @@ export async function getUsersByFilter(filter){
     }
 }
 
-export async function getDistricts(){
+export async function getDistricts() {
     try {
         return await DistrictModel.find({});
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
-export async function getAllCachedDistricts(){
+export async function getAllCachedDistricts() {
     try {
         return await CacheModel.find({});
-    }catch(error){
+    } catch (error) {
         console.log(error);
     }
 }
 
-export async function getCachedDistrict(districtId){
+export async function getCachedDistrict(districtId) {
     try {
-        return await CacheModel.findOne({"district": districtId});
-    }catch(error){
+        return await CacheModel.findOne({ district: districtId });
+    } catch (error) {
         console.log(error);
     }
 }
 
-export async function createCacheDistrict(data){
+export async function createCacheDistrict(data) {
     try {
         let obj = await CacheModel.create(data);
         await obj.save();
@@ -93,20 +93,18 @@ export async function createCacheDistrict(data){
     }
 }
 
-export async function bulkCreateCacheDistrict(data){
+export async function bulkCreateCacheDistrict(data) {
     try {
         let obj = await CacheModel.insertMany(data);
-        await obj.save();
     } catch (error) {
         console.log(error);
     }
 }
 
-export async function clearCache(){
+export async function clearCache() {
     try {
         await CacheModel.deleteMany({});
     } catch (error) {
         console.log(error);
     }
 }
-
