@@ -25,7 +25,7 @@ async function start() {
 start();
 if (DEBUG) console.log("DEBUG Mode");
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url)); // jshint ignore:line
 
 app.use(express.static(__dirname + "/public"));
 app.get("/", (_, res) => {
