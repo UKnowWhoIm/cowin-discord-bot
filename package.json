@@ -2,12 +2,12 @@
   "name": "cowin-discord-bot",
   "version": "0.0.1",
   "description": "A discord app to get upcoming COWIN appointments based on commands",
-  "main": "index.js",
+  "main": "./src/index.js",
   "type": "module",
   "scripts": {
-    "lint": "jshint --exclude='node_modules/' *.js commands/*.js api/*.js commands/*.js",
+    "lint": "jshint src/*.js src/commands/*.js src/api/*.js src/models/*.js",
     "test": "npm run lint",
-    "start": "node index.js"
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
