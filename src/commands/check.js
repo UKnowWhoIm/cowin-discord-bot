@@ -1,5 +1,5 @@
 import { Command, getAge, getUserID, parseDistrict, processResults, sendReply } from "./common.js";
-import { readUserData } from "../dbCrud.js";
+import { createCacheDistrict, getCachedDistrict, readUserData } from "../dbCrud.js";
 import { getCalenderByDistrict } from "../api/api.js";
 
 const cmdName = "check";
@@ -71,12 +71,28 @@ async function checkAvailability(bot, interaction){
         return sendReply(bot, interaction,
             "Invalid date, please enter date in format dd-mm-yyyy");
     
-    const apiFetch = await getCalenderByDistrict(district, date, age);
-    if(apiFetch.status)
-        processResults(bot, interaction, apiFetch.result);
-    else
-        sendReply(bot, interaction, 
-            "Internal Server Error, Please try again later");
+
+    const cachedDistrict = await getCachedDistrict(district);
+    let result;
+    
+    if(cachedDistrict){
+        console.log("loading from cache...");
+        result = cachedDistrict.data;
+    }
+    else{
+        const apiFetch = await getCalenderByDistrict(district, date, age);
+        if(apiFetch.status){
+            result = apiFetch.result;
+            createCacheDistrict({"district": district, "data": result}).then(
+                console.log(`Cached district ${district}`)
+            );
+        }
+        else
+            sendReply(bot, interaction, 
+                "API is not responding, Please try again later");
+    }
+    processResults(bot, interaction, result);
+   
 }
 
 new Command(cmdName, cmdData, checkAvailability);
