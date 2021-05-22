@@ -95,7 +95,7 @@ export async function createCacheDistrict(data) {
 
 export async function bulkCreateCacheDistrict(data) {
     try {
-        let obj = await CacheModel.insertMany(data);
+        await CacheModel.insertMany(data);
     } catch (error) {
         console.log(error);
     }
