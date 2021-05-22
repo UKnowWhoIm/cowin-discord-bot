@@ -13,6 +13,7 @@ function getDataFromResponse(res, age, date) {
     let flag = 0;
     for (const r of res) {
         /* jshint ignore:start */
+        flag = 0;
         let result = {
             centerId: r.center_id,
             name: r.name,
@@ -29,7 +30,6 @@ function getDataFromResponse(res, age, date) {
                 "day"
             );
             let d2 = DateTime.fromFormat(date, "dd-MM-yyyy").startOf("day");
-
             if (d1 >= d2) {
                 let center = {
                     date: session.date,
@@ -47,10 +47,8 @@ function getDataFromResponse(res, age, date) {
             }
         }
         /* jshint ignore:end */
-        if (flag === 1) {
+        if (flag === 1)
             data.push(result);
-            flag = 0;
-        }
     }
     return data;
 }
@@ -132,9 +130,11 @@ async function getCalenderByPin(pin, date, age, process = true) {
     }
 }
 
-async function getCalenderByDistrict(id, date, age) {
+async function getCalenderByDistrict(id) {
     try {
-        const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
+        console.log("API CALL");
+        const today = DateTime.now().toFormat("dd-MM-yyyy");
+        const url = `${getCalenderByDistrictPath}district_id=${id}&date=${today}`;
         const res = await api.get(url);
         let result = res.data;
 
@@ -156,6 +156,7 @@ async function getCalenderByDistrict(id, date, age) {
             if (res.status === 500) throw new Error("Internal Server Error");
         }
     } catch (e) {
+        console.log(e);
         return {
             status: false,
             message: e.message,

@@ -1,9 +1,5 @@
 import { DateTime } from "luxon";
-import {
-    bulkCreateCacheDistrict,
-    clearCache,
-    getUsersByFilter,
-} from "./dbCrud.js";
+import { bulkCreateCacheDistrict, clearCache, getUsersByFilter } from "./dbCrud.js";
 import { getCalenderByDistrict, getDataFromResponse } from "./api/api.js";
 import { Client } from "discord.js";
 import { processResults } from "./commands/common.js";

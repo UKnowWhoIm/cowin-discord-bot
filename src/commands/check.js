@@ -91,10 +91,9 @@ async function checkAvailability(bot, interaction) {
     const cachedDistrict = await getCachedDistrict(district);
     let result;
 
-    if (cachedDistrict) {
-        console.log("loading from cache...");
+    if (cachedDistrict)
         result = cachedDistrict.data;
-    } else {
+    else {
         const apiFetch = await getCalenderByDistrict(district, date, age);
         if (apiFetch.status) {
             result = apiFetch.result;

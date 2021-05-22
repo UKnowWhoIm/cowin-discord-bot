@@ -87,6 +87,11 @@ Address: ${center.address}
 Pincode: ${center.pincode}
 Fee Type: ${center.feeType} ${getSessionText(center.sessions)}
 `));
+        
+        sendDM(bot, userID ?? getUserID(interaction),
+`Register Now: https://www.cowin.gov.in/home
+I'm a bot, so don't reply....
+`);
         // jshint ignore:end
             if(!userID)
                 return sendReply(bot, interaction,
