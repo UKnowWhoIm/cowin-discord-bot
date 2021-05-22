@@ -118,7 +118,7 @@ async function getCalenderByPin(pin, date, age, process = true) {
     }
 }
 
-async function getCalenderByDistrict(id, date, age, process = true) {
+async function getCalenderByDistrict(id, date, age) {
     try {
         const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
         const res = await api.get(url);
@@ -133,7 +133,7 @@ async function getCalenderByDistrict(id, date, age, process = true) {
             if (result !== undefined)
                 return {
                     status: true,
-                    result: process ? getDataFromResponse(result, age) : result,
+                    result: result,
                 };
             else throw new Error("Centers are undefined");
         } else {
@@ -144,6 +144,7 @@ async function getCalenderByDistrict(id, date, age, process = true) {
             if (res.status === 500) throw new Error("Internal Server Error");
         }
     } catch (e) {
+        console.log(e);
         return {
             status: false,
             message: e.message,

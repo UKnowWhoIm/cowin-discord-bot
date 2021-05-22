@@ -46,8 +46,10 @@ export async function job(){
             if(apiFetch.status)
                 cache[user.district] = apiFetch.result;
         }
-        const results = getDataFromResponse(cache[user.district], user.age);
-        processResults(bot, null, results, user.userID);
+        if(cache[user.district]){
+            const results = getDataFromResponse(cache[user.district], user.age);
+            processResults(bot, null, results, user.userID);
+        }
     }
     bulkCreateCacheDistrict(processDataForStorage(cache));
 }

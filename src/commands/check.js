@@ -1,6 +1,6 @@
 import { Command, getAge, getUserID, parseDistrict, processResults, sendReply } from "./common.js";
 import { createCacheDistrict, getCachedDistrict, readUserData } from "../dbCrud.js";
-import { getCalenderByDistrict } from "../api/api.js";
+import { getCalenderByDistrict, getDataFromResponse } from "../api/api.js";
 
 const cmdName = "check";
 
@@ -85,13 +85,14 @@ async function checkAvailability(bot, interaction){
             result = apiFetch.result;
             createCacheDistrict({"district": district, "data": result}).then(
                 console.log(`Cached district ${district}`)
-            );
+            ); 
         }
         else
             sendReply(bot, interaction, 
                 "API is not responding, Please try again later");
     }
-    processResults(bot, interaction, result);
+    if(result)
+        processResults(bot, interaction, getDataFromResponse(result, age));
    
 }
 
