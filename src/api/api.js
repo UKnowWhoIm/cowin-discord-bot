@@ -9,6 +9,7 @@ import {
 
 function getDataFromResponse(res, age) {
     let data = [];
+    let flag = 0;
     for (const r of res) {
         /* jshint ignore:start */
         let result = {
@@ -32,11 +33,16 @@ function getDataFromResponse(res, age) {
                 vaccine: session.vaccine,
                 slots: session.slots,
             };
-            if (center.totalCapacity > 0 && age === center.ageLimit)
+            if (center.totalCapacity > 0 && age === center.ageLimit) {
                 result.sessions.push(center);
+                flag = 1;
+            }
         }
         /* jshint ignore:end */
-        data.push(result);
+        if (flag === 1) {
+            data.push(result);
+            flag = 0;
+        }
     }
     return data;
 }
@@ -123,12 +129,10 @@ async function getCalenderByDistrict(id, date, age, process = true) {
         const url = `${getCalenderByDistrictPath}district_id=${id}&date=${date}`;
         const res = await api.get(url);
         let result = res.data;
-        
-        if(IS_PROXY)
-            result = result.data.centers;
-        else
-            result = result.centers;
-        
+
+        if (IS_PROXY) result = result.data.centers;
+        else result = result.centers;
+
         if (res.status === 200) {
             if (result !== undefined)
                 return {
