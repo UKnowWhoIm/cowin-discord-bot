@@ -1,9 +1,10 @@
 import express from "express";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import mongoose from "mongoose";
 import { job } from "./cron.js";
-import cron from "node-cron";   
+import cron from "node-cron";
 import { DEBUG, mongoURL } from "./config.js";
-
 
 const app = express();
 const port = process.env.PORT ?? "3000"; // jshint ignore:line
@@ -22,11 +23,15 @@ async function start() {
 }
 
 start();
-if(DEBUG)
-    console.log("DEBUG Mode");
+if (DEBUG) console.log("DEBUG Mode");
 
+const __dirname = dirname(fileURLToPath(import.meta.url)); // jshint ignore:line
+
+app.use(express.static(__dirname + "/public"));
 app.get("/", (_, res) => {
-    res.send("Hello World!");
+    console.log(__dirname);
+
+    res.sendFile(join(__dirname + "/index.html"));
 });
 
 app.listen(port, () => {
