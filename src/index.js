@@ -29,8 +29,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url)); // jshint ignore:line
 
 app.use(express.static(__dirname + "/public"));
 app.get("/", (_, res) => {
-    console.log(__dirname);
-
     res.sendFile(join(__dirname + "/index.html"));
 });
 
