@@ -1,4 +1,4 @@
-![Cowin Assist](src/images/header.png)
+![Cowin Assist](images/header.png)
 
 ### Table of contents
 
@@ -31,13 +31,14 @@ The Cowin Assist lets you,
 -   Navigate to COWIN site if slot available,
 -   Subscribe for an hourly update on open slots if available,
 
-For detailed information regarding the slash commands check [this](src/commands/README.md) out.
+For detailed information regarding the slash commands check [this](commands/README.md) out.
 
 ### Workflow
 
-For detailed understanding of the working of the project refer the [flowchart](https://drive.google.com/file/d/1H6qJQC6MelXA9a2Cfa4C5RY3QZ_ydB3e/view?usp=sharing) that we have prepared.
+For detailed understanding of the working of the project refer the [flowchart](images/flowchart.jpg) that we have prepared.
 
 ### How to add the bot to your server?
+
 1. Ensure that you have the latest version of the discord client
 2. Visit the **Cowin Assist Bot's** [website](https://cowin-discord-bot-1.uknowwhoim.repl.co/) and click on the **Add to server** button.
 3. Then login or register with your discord server.
@@ -50,17 +51,17 @@ For detailed understanding of the working of the project refer the [flowchart](h
 #### Bot
 
 <div float="left">
-    <img src="src/images/1.jpg"  width="200" height="345">
-    <img src="src/images/4.jpg" width="200" height="345">
-    <img src="src/images/2.jpg" width="200" height="345">
-    <img src="src/images/3.jpg" width="200" height="345">
+    <img src="images/1.jpg"  width="200" height="345">
+    <img src="images/4.jpg" width="200" height="345">
+    <img src="images/2.jpg" width="200" height="345">
+    <img src="images/3.jpg" width="200" height="345">
 </div>
 
 #### Web Interface
 
 <div float="left">
-    <img src="src/images/web1.png" width="450">
-    <img src="src/images/web2.png" width="450">
+    <img src="images/web1.png" width="400">
+    <img src="images/web2.png" width="400">
 </div>
 
 ### Contributing
