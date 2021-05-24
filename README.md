@@ -4,6 +4,19 @@
 
 Cowin Assist is a discord chat-bot that lets the user track the availability of covid vaccination centres in India via the [CoWin API](https://apisetu.gov.in/public/api/cowin#/). It has a bunch of commands through which the user can set/update their desired filters to receive up to date information regarding the vaccine centres.
 
+### Features
+
+The Cowin Assist lets you,
+
+-   Add the discord bot to a server,
+-   Register your district and age (just once, we'll save it for you),
+-   Update your saved data if needed,
+-   Check for the availability of a vaccine centre using the data provided,
+-   Navigate to COWIN site if slot available,
+-   Subscribe for an hourly update on open slots if available,
+
+For detailed information regarding the slash commands check [this](src/commands/README.md) out.
+
 ### Team Members
 
 1. [Irene Anna Kurien](https://github.com/irenekurien)
@@ -45,27 +58,14 @@ Cowin Assist is a discord chat-bot that lets the user track the availability of 
 4. Clone the repo by running `git clone https://github.com/UKnowWhoIm/cowin-discord-bot.git`
 5. Setup the environment file, with the help of `.env.example`.
 
+### Workflow
+
+For detailed understanding of the working of the project refer the [flowchart](images/flowchart.jpg) that we have prepared.
+
 ### How to Run
 
 1. Install Node Modules, `npm install`
 2. Run the project, `npm start`
-
-### Features
-
-The Cowin Assist lets you,
-
--   Add the discord bot to a server,
--   Register your district and age (just once, we'll save it for you),
--   Update your saved data if needed,
--   Check for the availability of a vaccine centre using the data provided,
--   Navigate to COWIN site if slot available,
--   Subscribe for an hourly update on open slots if available,
-
-For detailed information regarding the slash commands check [this](commands/README.md) out.
-
-### Workflow
-
-For detailed understanding of the working of the project refer the [flowchart](images/flowchart.jpg) that we have prepared.
 
 ### Demo
 
@@ -84,12 +84,3 @@ For detailed understanding of the working of the project refer the [flowchart](i
     <img src="images/web1.png" width="400">
     <img src="images/web2.png" width="400">
 </div>
-
-### Contributing
-
-You may notice several `jshint ignore` comments in the code. It's because JSHint has not yet released support for optional chaining(`.?`). The feature is in the works for [v2.13](https://github.com/jshint/jshint/pull/3486). This is a temporary fix until they release `v2.13`
-
-
-### License
-
-This project is licensed under the permissive open-source [MIT license](LICENSE).
