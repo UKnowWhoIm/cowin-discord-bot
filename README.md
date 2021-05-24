@@ -15,7 +15,7 @@ Cowin Assist is a discord chat-bot that lets the user track the availability of 
 
 ### Link to product walkthrough
 
-Link
+[Walkthrough](https://drive.google.com/file/d/1r_2xH7ezslzEUs2KwXiSIML-PhcvmNBF/view)
 
 ### How to add the bot to your server?
 
