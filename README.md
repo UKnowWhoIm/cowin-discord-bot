@@ -15,7 +15,7 @@ The Cowin Assist lets you,
 -   Navigate to COWIN site if slot available,
 -   Subscribe for an hourly update on open slots if available,
 
-For detailed information regarding the slash commands check [this](commands/README.md) out.
+For detailed information regarding the slash commands check [this](src/commands/README.md) out.
 
 ### Team Members
 
