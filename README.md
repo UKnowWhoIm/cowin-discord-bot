@@ -28,7 +28,7 @@ For detailed information regarding the slash commands check [this](src/commands/
 
 ### Link to product walkthrough
 
-[Walkthrough](https://drive.google.com/file/d/1r_2xH7ezslzEUs2KwXiSIML-PhcvmNBF/view)
+[Walkthrough](https://drive.google.com/file/d/1azeE2Qa9WF6BtvV06_4fke5SwPUOCXVf/view)
 
 ### How to add the bot to your server?
 
