@@ -66,7 +66,7 @@ For detailed understanding of the working of the project refer the [flowchart](i
 
 ### Contributing
 
-You may notice sever `jshint ignore` comments in the code. It's because JSHint has not yet released support for optional chaining(`.?`). The feature is in the works for [v2.13](https://github.com/jshint/jshint/pull/3486). This is a temporary fix until they release `v2.13`
+You may notice several `jshint ignore` comments in the code. It's because JSHint has not yet released support for optional chaining(`.?`). The feature is in the works for [v2.13](https://github.com/jshint/jshint/pull/3486). This is a temporary fix until they release `v2.13`
 
 #### Requirements
 

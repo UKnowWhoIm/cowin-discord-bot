@@ -12,19 +12,6 @@ async function initilizeBot() {
     return bot;
 }
 
-function padLeft(num) {
-    // pad 0 to left
-    if (num < 10) return `0${num}`;
-    return `${num}`;
-}
-
-function getDate() {
-    const date = new Date();
-    return `${padLeft(date.getDate())}-${padLeft(
-        date.getMonth() + 1
-    )}-${date.getFullYear()}`;
-}
-
 function processDataForStorage(cached) {
     // Convert to list of objects for db storage
     let finalData = [];
@@ -46,11 +33,13 @@ export async function job() {
         if (cache[user.district] === undefined) {
             const apiFetch = await getCalenderByDistrict(
                 user.district,
-                getDate(),
+                DateTime.now().toFormat("dd-MM-yyyy"),
                 null,
                 false
             );
             if (apiFetch.status) cache[user.district] = apiFetch.result;
+            else
+                console.log(apiFetch.result, DateTime.now().toFormat("dd-MM-yyyy"));
         }
         if (cache[user.district]) {
             const results = getDataFromResponse(

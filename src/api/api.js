@@ -4,7 +4,6 @@ import {
     api,
     getStatesPath,
     getDistrictsByStatePath,
-    getCalenderByPinPath,
     getCalenderByDistrictPath,
 } from "./helper.js";
 
@@ -101,35 +100,6 @@ async function getDistrictsByStateId(id) {
     }
 }
 
-async function getCalenderByPin(pin, date, age, process = true) {
-    try {
-        const res = await api.get(
-            `${getCalenderByPinPath}pincode=${pin}&date=${date}`
-        );
-
-        if (res.status === 200) {
-            const result = res.data.centers;
-            if (result !== undefined)
-                return {
-                    status: true,
-                    result: process ? getDataFromResponse(result, age) : result,
-                };
-            else throw new Error("Centers are undefined");
-        } else {
-            if (res.status === 400) throw new Error(res.error);
-
-            if (res.status === 401) throw new Error("Unauthenticated access!");
-
-            if (res.status === 500) throw new Error("Internal Server Error");
-        }
-    } catch (e) {
-        return {
-            status: false,
-            message: e.message,
-        };
-    }
-}
-
 async function getCalenderByDistrict(id) {
     try {
         console.log("API CALL");
@@ -167,7 +137,6 @@ async function getCalenderByDistrict(id) {
 export {
     getStates,
     getDistrictsByStateId,
-    getCalenderByPin,
     getCalenderByDistrict,
     getDataFromResponse,
 };
