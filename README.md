@@ -40,7 +40,7 @@ For detailed understanding of the working of the project refer the [flowchart](i
 ### How to add the bot to your server?
 
 1. Ensure that you have the latest version of the discord client
-2. Visit the **Cowin Assist Bot's** [website](https://cowin-discord-bot-1.uknowwhoim.repl.co/) and click on the **Add to server** button.
+2. Visit the **Cowin Assist Bot's** [website](https://cowin-discord-bot.el.r.appspot.com/) and click on the **Add to server** button.
 3. Then login or register with your discord server.
 4. After logging in, select the server from the list where you wish to display the Bot.
 5. Provide authorization for the Bot to regulate and control your discord server.
