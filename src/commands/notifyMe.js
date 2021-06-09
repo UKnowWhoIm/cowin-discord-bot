@@ -13,14 +13,12 @@ async function addUserToListners(bot, interaction){
     
     const userInDB = await readUserData(user.id);
     
-    // jshint ignore:start
     if(!userInDB?.district)
         return sendReply(bot, interaction,
             "Set your district using /set command to recieve hourly notifications");
     if(!userInDB?.age)
         return sendReply(bot, interaction,
-            "Set your age using /set command to recieve hourly notifications")
-    // jshint ignore:end
+            "Set your age using /set command to recieve hourly notifications");
 
     updateUserData(user.id, {"notify": true});
     sendReply(bot, interaction, `You have subscribed to hourly notifications`);

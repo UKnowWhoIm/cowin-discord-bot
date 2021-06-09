@@ -2,7 +2,7 @@ import { findBestMatch } from "string-similarity";
 import { getDistricts } from "../dbCrud.js";
 
 export class Command{
-    static instances = [];    // jshint ignore:line
+    static instances = []; // jshint ignore:line
 
     constructor(cmdName, cmdData, cmdCallBack){
         this.name = cmdName;
@@ -57,14 +57,12 @@ export async function parseDistrict(district){
     const matches = findBestMatch(district.toLowerCase(), districtNames).ratings
         .filter((match) => match.rating >= minDiceCoeff);
 
-    /* jshint ignore:start */
     return {
         "name": matches[0]?.target,
         "code": districtsInDb.filter((district) => 
             district.districtName.toLowerCase() === matches[0]?.target
         )[0]?.districtID
     };
-    /* jshint ignore:end */
 }
 
 function getSessionText(sessions){
@@ -83,7 +81,6 @@ export async function processResults(bot, interaction, results, userID){
         if(!userID)
             sendReply(bot, interaction,
                 "Slots available");
-        // jshint ignore:start
         for(const center of results)
             await sendDM(bot, userID ?? getUserID(interaction), `
 <<<<<<<< New Center Available >>>>>>>>
@@ -95,9 +92,7 @@ Fee Type: ${center.feeType} ${getSessionText(center.sessions)}`);
         return sendDM(bot, userID ?? getUserID(interaction),
 `Register Now: https://www.cowin.gov.in/home
 ***I'm a bot, so don't reply***....
-`);
-        // jshint ignore:end
-            
+`);            
         }
         if(!userID)
             return sendReply(bot, interaction, 

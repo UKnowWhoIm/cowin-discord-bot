@@ -7,7 +7,7 @@ import cron from "node-cron";
 import { DEBUG, mongoURL } from "./config.js";
 
 const app = express();
-const port = process.env.PORT ?? "3000"; // jshint ignore:line
+const port = process.env.PORT ?? "3000";
 
 async function start() {
     try {

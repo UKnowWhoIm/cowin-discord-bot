@@ -1,6 +1,6 @@
 {
     "node": true,
-    "esversion": 9,
+    "esversion": 11,
     "camelcase": true,
     "eqeqeq": true,
     "evil": true,
