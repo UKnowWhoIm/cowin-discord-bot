@@ -37,7 +37,7 @@ app.listen(port, () => {
 });
 
 // In debug mode send notif every minute
-cron.schedule(DEBUG ? "*/5 * * * *" : "0 * * * *", () => {
+cron.schedule(DEBUG ? "*/5 * * * *" : "*/15 * * * *", () => {
     console.log("Starting notifications");
     job();
 },

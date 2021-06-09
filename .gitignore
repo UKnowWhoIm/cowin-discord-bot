@@ -1,4 +1,8 @@
 # Logs
+app.yaml
+
+.gcloudignore
+
 logs
 *.log
 npm-debug.log*
