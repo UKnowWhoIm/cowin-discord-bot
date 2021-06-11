@@ -51,7 +51,7 @@ export const getAge = (age) => {
         default:
             return 18;
     }
-}
+};
 
 export async function sendDM(bot, userId, msg) {
     const user = await bot.users.fetch(userId);
